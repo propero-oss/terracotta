@@ -1,11 +1,12 @@
 {
-  "name": "@propero/terracotta",
+  "name": "terracotta",
   "version": "0.0.2-0",
   "description": "Typescript Decorators for Webcomponents",
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha",
-    "build": "tsc"
+    "build": "tsc",
+    "release:next": "npm run build && npm version prerelease && npm pack && npm publish *.tgz --tag next && rm *.tgz"
   },
   "repository": {
     "type": "git",
