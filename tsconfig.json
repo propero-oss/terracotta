@@ -7,7 +7,9 @@
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "jsx": "react",
+    "jsxFactory": "Component.render"
   },
   "exclude": ["node_modules"],
   "include": ["src"]
