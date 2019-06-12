@@ -1,4 +1,7 @@
 import {toKebapCase} from "../../util";
+import {addExtension, ComponentExtension} from "../../component/extension";
+import {Constructor, Webcomponent} from "../../types";
+import "reflect-metadata";
 
 /**
  * @typedef PropertyOptions
@@ -20,8 +23,8 @@ export interface PropertyOptions {
   mutable?: boolean;
   notify?: boolean;
   sync?: "init" | "attr" | "prop" | "both" | "none";
-  parser?: ((val: string | boolean) => any);
-  serializer?: ((val: any) => string | boolean);
+  parser?: ((val: string | boolean, cls: any, prop: string | symbol, type: Function) => any);
+  serializer?: ((val: any, cls: any, prop: string | symbol, type: Function) => string | boolean);
   type?: Function;
   rerender?: boolean;
   attribute?: string;
@@ -38,6 +41,26 @@ export function defaultPropertyAttributeName(property: string) {
   return toKebapCase(property);
 }
 
+export function defaultAttributeSerializer(val: any, cls: any, prop: string | symbol, type: Function) {
+  switch(type.name) {
+    case "String": return val;
+    case "Number": return `${val}`;
+    case "Boolean": return val;
+    case "Date": return val ? (val as Date).toISOString() : false;
+    case "RegExp": return val ? (val as RegExp).source : false;
+  }
+}
+
+export function defaultAttributeParser(val: string | boolean, cls: any, prop: string | symbol, type: Function) {
+  switch(type.name) {
+    case "String": return val != false ? val : undefined;
+    case "Number": return val != false ? +val : undefined;
+    case "Boolean": return !!val && val != "false";
+    case "Date": return val ? new Date(val as string) : undefined;
+    case "RegExp": return val ? new RegExp(val as string) : undefined;
+  }
+}
+
 /**
  * Defines a property that can be set by an attribute or be reflected to an attribute.
  * It can be configured by providing an options object.
@@ -46,6 +69,50 @@ export function defaultPropertyAttributeName(property: string) {
  */
 export function Prop(opts?: PropertyOptions): PropertyDecorator {
   return function<T>(target, propertyKey) {
-    const options = Object.assign({}, DefaultPropertyOptions, {attribute: defaultPropertyAttributeName(propertyKey)}, opts);
+    const options = Object.assign({},
+      DefaultPropertyOptions,
+      {
+        attribute: defaultPropertyAttributeName(propertyKey),
+        type: Reflect.getMetadata("design:type", target, propertyKey),
+        parser: defaultAttributeParser,
+        serializer: defaultAttributeSerializer,
+      }, opts);
+    addExtension(target, new PropertyExtension(options, propertyKey));
+  }
+}
+
+export class PropertyExtension implements ComponentExtension<Webcomponent> {
+  constructor(private opts: PropertyOptions, private property: string | symbol) {}
+
+  connect(cls: Constructor<Webcomponent>, instance: Webcomponent) {
+    if (["init","attr","both"].indexOf(this.opts.sync) == -1) return;
+    if (instance.hasAttribute(this.opts.attribute)) {
+      const val = instance.getAttribute(this.opts.attribute);
+      const type = this.opts.type;
+      instance[this.property] = this.opts.parser(val, cls, this.property, type);
+    }
+  }
+
+  afterPropertyChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string, oldVal: any, newVal: any, stage: string) {
+    if (key != this.property) return;
+    if (["prop","both"].indexOf(this.opts.sync) == -1) return;
+    const type = this.opts.type;
+    const val = this.opts.serializer(newVal, cls, key, type);
+    if (val == null || val === false)
+      instance.removeAttribute(this.opts.attribute);
+    else
+      instance.setAttribute(this.opts.attribute, val == true ? this.opts.attribute : val as string);
+  }
+
+  afterAttributeChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string, oldVal: string, newVal: string, stage: string) {
+    if (key != this.property) return;
+    if (["attr","both"].indexOf(this.opts.sync) == -1) return;
+    const val = instance.getAttribute(this.opts.attribute);
+    const type = this.opts.type;
+    instance[this.property] = this.opts.parser(val, cls, this.property, type);
+  }
+
+  get observedAttributes(): string[] {
+    return ["attr","both"].indexOf(this.opts.sync) != -1 ? [this.opts.attribute] : [];
   }
 }

@@ -2,6 +2,7 @@ import {Webcomponent} from "../../types/webcomponent";
 import {Constructor} from "../../types/constructor";
 import {toKebapCase} from "../../util";
 import {h} from "../../static";
+import {getExtensions} from "../../component/extension";
 
 /**
  * @typedef ComponentOptions
@@ -14,7 +15,8 @@ export interface ComponentOptions {
   shadow?: boolean;
   mode?: "open" | "closed";
   tag?: string;
-  registry?: CustomElementRegistry
+  registry?: CustomElementRegistry,
+  opts?: ElementDefinitionOptions,
 }
 
 export const DefaultComponentOptions: ComponentOptions = {
@@ -40,6 +42,13 @@ export interface Component<T> {
 export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T>) => Constructor<T & Webcomponent> {
   return function<T>(target: Constructor<T>): Constructor<T & Webcomponent> {
     const options = Object.assign({}, DefaultComponentOptions, {tag: defaultTagNameForClass(target)}, opts);
+
+    getExtensions(target)
+      .filter(extension => extension.register)
+      .forEach(extension => extension.register(target));
+    options.registry.define(options.tag, target, options.opts);
+
+
 
     return target as unknown as Constructor<T & Webcomponent>;
   }
