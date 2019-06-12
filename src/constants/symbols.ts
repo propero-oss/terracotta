@@ -1,2 +1,2 @@
-export const METADATA = Symbol("metadata");
+export const TERRACOTTA = "TERRACOTTA";
 

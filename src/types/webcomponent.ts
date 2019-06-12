@@ -2,7 +2,7 @@ import {ComponentMetadata} from "../metadata";
 import {Model} from "./model";
 
 
-export interface Webcomponent {
+export interface Webcomponent extends HTMLElement {
   //<editor-fold desc="Hooks">
   /**
    * Attributes for the host element, styles, classes, etc.
