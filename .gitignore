@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+# Jetbrains Project Configurations
+.idea/
+
+# Build Target
+dist/
