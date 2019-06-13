@@ -2,7 +2,11 @@ import {Webcomponent} from "../../types/webcomponent";
 import {Constructor} from "../../types/constructor";
 import {toKebapCase} from "../../util";
 import {h} from "../../static";
-import {getExtensions} from "../../component/extension";
+import {getExtensions, mergeObservedAttributes, mergeObservedProperties} from "../../component/extension";
+import {PROPERTIES, Stages} from "../../constants";
+import {Stage} from "../../constants/stage";
+import {lock, locked, unlock} from "../../properties";
+import {createAccessors} from "../../properties/observed-properties";
 
 /**
  * @typedef ComponentOptions
@@ -43,9 +47,15 @@ export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T
   return function<T>(target: Constructor<T>): Constructor<T & Webcomponent> {
     const options = Object.assign({}, DefaultComponentOptions, {tag: defaultTagNameForClass(target)}, opts);
 
-    getExtensions(target)
+    const extensions = getExtensions(target);
+    extensions
       .filter(extension => extension.register)
       .forEach(extension => extension.register(target));
+
+    Object.defineProperty(target, 'observedAttributes', { value: mergeObservedAttributes(target) });
+    const propertyObserving = extensions.filter(extension => extension.afterPropertyChange || extension.beforePropertyChange);
+    createAccessors(target, propertyObserving, mergeObservedProperties(target));
+
     options.registry.define(options.tag, target, options.opts);
 
 
@@ -55,3 +65,5 @@ export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T
 }
 
 Component.render = h;
+
+

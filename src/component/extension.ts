@@ -7,16 +7,17 @@ export interface ComponentExtension<T extends Webcomponent> {
   register?(cls: Constructor<T>);
   construct?(cls: Constructor<T>, instance: T);
   connect?(cls: Constructor<T>, instance: T);
-  beforePropertyChange?(cls: Constructor<T>, instance: T, key: string, oldVal: any, newVal: any, stage: string);
-  afterPropertyChange?(cls: Constructor<T>, instance: T, key: string, oldVal: any, newVal: any, stage: string);
-  beforeAttributeChange?(cls: Constructor<T>, instance: T, key: string, oldVal: string, newVal: string, stage: string);
-  afterAttributeChange?(cls: Constructor<T>, instance: T, key: string, oldVal: string, newVal: string, stage: string);
+  beforePropertyChange?(cls: Constructor<T>, instance: T, key: string | symbol, oldVal: any, newVal: any);
+  afterPropertyChange?(cls: Constructor<T>, instance: T, key: string | symbol, oldVal: any, newVal: any);
+  beforeAttributeChange?(cls: Constructor<T>, instance: T, key: string, oldVal: string, newVal: string);
+  afterAttributeChange?(cls: Constructor<T>, instance: T, key: string, oldVal: string, newVal: string);
   beforeRender?(cls: Constructor<T>, instance: T);
   afterRender?(cls: Constructor<T>, instance: T);
   disconnect?(cls: Constructor<T>, instance: T);
   destroy?(cls: Constructor<T>, instance: T);
 
   observedAttributes?: string[];
+  observedProperties?: (string | symbol)[];
 }
 
 
@@ -51,5 +52,13 @@ export function mergeObservedAttributes(target: any): string[] {
     .filter(ext => ext.observedAttributes)
     .map(ext => ext.observedAttributes)
     .reduce((all, one) => all.concat(one), [])
-    .filter(distinct())
+    .filter(distinct());
+}
+
+export function mergeObservedProperties(target: any): (string | symbol)[] {
+  return mergeExtensions(target)
+    .filter(ext => ext.observedProperties)
+    .map(ext => ext.observedProperties)
+    .reduce((all, one) => all.concat(one), [])
+    .filter(distinct());
 }

@@ -93,7 +93,7 @@ export class PropertyExtension implements ComponentExtension<Webcomponent> {
     }
   }
 
-  afterPropertyChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string, oldVal: any, newVal: any, stage: string) {
+  afterPropertyChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string | symbol, oldVal: any, newVal: any) {
     if (key != this.property) return;
     if (["prop","both"].indexOf(this.opts.sync) == -1) return;
     const type = this.opts.type;
@@ -104,7 +104,7 @@ export class PropertyExtension implements ComponentExtension<Webcomponent> {
       instance.setAttribute(this.opts.attribute, val == true ? this.opts.attribute : val as string);
   }
 
-  afterAttributeChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string, oldVal: string, newVal: string, stage: string) {
+  afterAttributeChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string, oldVal: string, newVal: string) {
     if (key != this.property) return;
     if (["attr","both"].indexOf(this.opts.sync) == -1) return;
     const val = instance.getAttribute(this.opts.attribute);
@@ -114,5 +114,9 @@ export class PropertyExtension implements ComponentExtension<Webcomponent> {
 
   get observedAttributes(): string[] {
     return ["attr","both"].indexOf(this.opts.sync) != -1 ? [this.opts.attribute] : [];
+  }
+
+  get observedProperties(): (string | symbol)[] {
+    return ["prop","both"].indexOf(this.opts.sync) != -1 ? [this.property] : [];
   }
 }
