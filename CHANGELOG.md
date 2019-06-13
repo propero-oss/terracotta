@@ -1,5 +1,14 @@
 ## Changelog
 
+### v0.0.3
+- add support for property change hooks [[9adcc6]](commits/273315603ef774f5b0f6365b05eb82afb79adcc6)
+- updated docs [[f3b1ad]](commits/59ac6cec1d643030599f538f4d7e9b0a8ef3b1ad)
+- update ngm, authors and changelog [[f65f41]](commits/ed7235f0527c3241b088c7fec0d3e31df5f65f41)
+- 0.0.2 [[afcacf]](commits/0c6cee141266a902bf7f0d3b3b51538ad0afcacf)
+- add property component extension to prop decorator [[f8237d]](commits/37ed0e211dd518e78f82d906d83d712e23f8237d)
+- add support for component extensions [[f8fa0a]](commits/feb74ed3c0ec7421463780cf88a4ffd6eef8fa0a)
+- Update Authors and Changelog [[6c22d1]](commits/b120c4621de204a1d9c108446dca5ed32f6c22d1)
+
 ### v0.0.2-2
 - Project Restructuring [[b4965f]](commits/719c3d9a679ec2feba21cde2244a2c1230b4965f)
 
@@ -24,4 +33,4 @@
 - 0.0.2-0 [[8d443e]](commits/8016cc2be930acf7af4cfb4cd4d650e01d8d443e)
 - Initial commit [[17de66]](commits/44324b3366ad6b6e72e808e14f830c355217de66)
 
-###### Generated on 2019-06-12T23:26:07.855Z | Made with @propero/ngm
+###### Generated on 2019-06-13T18:14:13.933Z | Made with @propero/ngm
