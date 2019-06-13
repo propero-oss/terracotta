@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;decorators/method-decorators/autobound&quot; | terracotta</title>
+	<title>&quot;properties/lock&quot; | terracotta</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_decorators_method_decorators_autobound_.html">&quot;decorators/method-decorators/autobound&quot;</a>
+					<a href="_properties_lock_.html">&quot;properties/lock&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;decorators/method-decorators/autobound&quot;</h1>
+			<h1>External module &quot;properties/lock&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,9 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_decorators_method_decorators_autobound_.html#autobound" class="tsd-kind-icon">Autobound</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_properties_lock_.html#lock" class="tsd-kind-icon">lock</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_properties_lock_.html#locked" class="tsd-kind-icon">locked</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_properties_lock_.html#unlock" class="tsd-kind-icon">unlock</a></li>
 							</ul>
 						</section>
 					</div>
@@ -82,28 +84,86 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="autobound" class="tsd-anchor"></a>
-					<h3>Autobound</h3>
+					<a name="lock" class="tsd-anchor"></a>
+					<h3>lock</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">Autobound<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MethodDecorator</span></li>
+						<li class="tsd-signature tsd-kind-icon">lock<span class="tsd-signature-symbol">(</span>instance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, property<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, stage<span class="tsd-signature-symbol">: </span><a href="_constants_stage_.html#stage" class="tsd-signature-type">Stage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/method-decorators/autobound.ts#L5">decorators/method-decorators/autobound.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/properties/lock.ts#L4">properties/lock.ts:4</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Binds a function to the enclosing component on first access.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>decorator</dt>
-									<dd></dd>
-								</dl>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MethodDecorator</span></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>instance: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>property: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+								<li>
+									<h5>stage: <a href="_constants_stage_.html#stage" class="tsd-signature-type">Stage</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="locked" class="tsd-anchor"></a>
+					<h3>locked</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">locked<span class="tsd-signature-symbol">(</span>instance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, property<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_constants_stage_.html#stage" class="tsd-signature-type">Stage</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/properties/lock.ts#L14">properties/lock.ts:14</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>instance: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>property: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_constants_stage_.html#stage" class="tsd-signature-type">Stage</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">undefined</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="unlock" class="tsd-anchor"></a>
+					<h3>unlock</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">unlock<span class="tsd-signature-symbol">(</span>instance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, property<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/properties/lock.ts#L9">properties/lock.ts:9</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>instance: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>property: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -116,14 +176,20 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_decorators_method_decorators_autobound_.html">"decorators/method-<wbr>decorators/autobound"</a>
+						<a href="_properties_lock_.html">"properties/lock"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_decorators_method_decorators_autobound_.html#autobound" class="tsd-kind-icon">Autobound</a>
+						<a href="_properties_lock_.html#lock" class="tsd-kind-icon">lock</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_properties_lock_.html#locked" class="tsd-kind-icon">locked</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_properties_lock_.html#unlock" class="tsd-kind-icon">unlock</a>
 					</li>
 				</ul>
 			</nav>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;decorators/method-decorators/autobound&quot; | terracotta</title>
+	<title>&quot;properties/observed-properties&quot; | terracotta</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_decorators_method_decorators_autobound_.html">&quot;decorators/method-decorators/autobound&quot;</a>
+					<a href="_properties_observed_properties_.html">&quot;properties/observed-properties&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;decorators/method-decorators/autobound&quot;</h1>
+			<h1>External module &quot;properties/observed-properties&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_decorators_method_decorators_autobound_.html#autobound" class="tsd-kind-icon">Autobound</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_properties_observed_properties_.html#createaccessors" class="tsd-kind-icon">create<wbr>Accessors</a></li>
 							</ul>
 						</section>
 					</div>
@@ -82,28 +82,31 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="autobound" class="tsd-anchor"></a>
-					<h3>Autobound</h3>
+					<a name="createaccessors" class="tsd-anchor"></a>
+					<h3>create<wbr>Accessors</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">Autobound<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MethodDecorator</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Accessors<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_constructor_.constructor.html" class="tsd-signature-type">Constructor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, extensions<span class="tsd-signature-symbol">: </span><a href="../interfaces/_component_extension_.componentextension.html" class="tsd-signature-type">ComponentExtension</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span>, properties<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/method-decorators/autobound.ts#L5">decorators/method-decorators/autobound.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/properties/observed-properties.ts#L6">properties/observed-properties.ts:6</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Binds a function to the enclosing component on first access.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>decorator</dt>
-									<dd></dd>
-								</dl>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MethodDecorator</span></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>target: <a href="../interfaces/_types_constructor_.constructor.html" class="tsd-signature-type">Constructor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>extensions: <a href="../interfaces/_component_extension_.componentextension.html" class="tsd-signature-type">ComponentExtension</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>properties: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -116,14 +119,14 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_decorators_method_decorators_autobound_.html">"decorators/method-<wbr>decorators/autobound"</a>
+						<a href="_properties_observed_properties_.html">"properties/observed-<wbr>properties"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_decorators_method_decorators_autobound_.html#autobound" class="tsd-kind-icon">Autobound</a>
+						<a href="_properties_observed_properties_.html#createaccessors" class="tsd-kind-icon">create<wbr>Accessors</a>
 					</li>
 				</ul>
 			</nav>

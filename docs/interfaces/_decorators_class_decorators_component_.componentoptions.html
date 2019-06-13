@@ -84,6 +84,9 @@
 						<dt>property</dt>
 						<dd><p>{string} [tag] The tag name to register the web component under. If none is defined, the class name converted to kebap-case and stipped of HTML prefix and Element suffix will be used.</p>
 						</dd>
+						<dt>property</dt>
+						<dd><p>{CustomElementRegistry} [registry] the registry to register the tag in.</p>
+						</dd>
 					</dl>
 				</div>
 			</section>
@@ -103,6 +106,8 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_class_decorators_component_.componentoptions.html#mode" class="tsd-kind-icon">mode</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_class_decorators_component_.componentoptions.html#opts" class="tsd-kind-icon">opts</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_class_decorators_component_.componentoptions.html#registry" class="tsd-kind-icon">registry</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_class_decorators_component_.componentoptions.html#shadow" class="tsd-kind-icon">shadow</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_class_decorators_component_.componentoptions.html#tag" class="tsd-kind-icon">tag</a></li>
 							</ul>
@@ -118,7 +123,27 @@
 					<div class="tsd-signature tsd-kind-icon">mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"open"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"closed"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/f33ea8e/src/decorators/class-decorators/component.ts#L13">decorators/class-decorators/component.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/class-decorators/component.ts#L20">decorators/class-decorators/component.ts:20</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="opts" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> opts</h3>
+					<div class="tsd-signature tsd-kind-icon">opts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementDefinitionOptions</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/class-decorators/component.ts#L23">decorators/class-decorators/component.ts:23</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="registry" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> registry</h3>
+					<div class="tsd-signature tsd-kind-icon">registry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CustomElementRegistry</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/class-decorators/component.ts#L22">decorators/class-decorators/component.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -128,7 +153,7 @@
 					<div class="tsd-signature tsd-kind-icon">shadow<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/f33ea8e/src/decorators/class-decorators/component.ts#L12">decorators/class-decorators/component.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/class-decorators/component.ts#L19">decorators/class-decorators/component.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -138,7 +163,7 @@
 					<div class="tsd-signature tsd-kind-icon">tag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/f33ea8e/src/decorators/class-decorators/component.ts#L14">decorators/class-decorators/component.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/class-decorators/component.ts#L21">decorators/class-decorators/component.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,6 +182,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_decorators_class_decorators_component_.component.html" class="tsd-kind-icon">Component</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
@@ -164,6 +192,12 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_decorators_class_decorators_component_.componentoptions.html#mode" class="tsd-kind-icon">mode</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_decorators_class_decorators_component_.componentoptions.html#opts" class="tsd-kind-icon">opts</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_decorators_class_decorators_component_.componentoptions.html#registry" class="tsd-kind-icon">registry</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_decorators_class_decorators_component_.componentoptions.html#shadow" class="tsd-kind-icon">shadow</a>
@@ -175,9 +209,6 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_decorators_class_decorators_component_.html#component" class="tsd-kind-icon">Component</a>
-					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="../modules/_decorators_class_decorators_component_.html#defaulttagnameforclass" class="tsd-kind-icon">default<wbr>Tag<wbr>Name<wbr>For<wbr>Class</a>
 					</li>
