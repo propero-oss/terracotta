@@ -1,5 +1,10 @@
 ## Changelog
 
+### v0.0.4
+- add inherit sync and parent discovery logic [[5e8b59]](commits/f54bb88e46db057b60c0137bc8b84245e45e8b59)
+- add event emitter logic [[756c45]](commits/d91b7be5908c9bf7e56614cadc7b1b312b756c45)
+- update changelog and authors [[d622b5]](commits/2221f52abf867cfb0af49f08387f1e11abd622b5)
+
 ### v0.0.3
 - add support for property change hooks [[9adcc6]](commits/273315603ef774f5b0f6365b05eb82afb79adcc6)
 - updated docs [[f3b1ad]](commits/59ac6cec1d643030599f538f4d7e9b0a8ef3b1ad)
@@ -33,4 +38,4 @@
 - 0.0.2-0 [[8d443e]](commits/8016cc2be930acf7af4cfb4cd4d650e01d8d443e)
 - Initial commit [[17de66]](commits/44324b3366ad6b6e72e808e14f830c355217de66)
 
-###### Generated on 2019-06-13T18:14:13.933Z | Made with @propero/ngm
+###### Generated on 2019-06-15T18:40:08.028Z | Made with @propero/ngm
