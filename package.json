@@ -8,7 +8,6 @@
     "build": "tsc",
     "docs": "typedoc --out docs src",
     "release:next": "npm run build && npm version prerelease && npm pack && npm publish *.tgz --tag next",
-    "postpublish": "rm ./*.tgz",
     "authors": "ngm authors --md --out AUTHORS.md",
     "changelog": "ngm changelog --md --out CHANGELOG.md"
   },
