@@ -8,3 +8,4 @@ export * from "./decorators";
 export * from "./metadata";
 export * from "./util";
 export * from "./static";
+export * from "./component";

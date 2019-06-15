@@ -1,4 +1,6 @@
 import {toKebapCase} from "../../util";
+import {Constructor, Webcomponent} from "../../types";
+import {addExtension, ComponentExtension} from "../../component";
 
 /**
  * @typedef EventOptions
@@ -20,7 +22,7 @@ export const DefaultEventOptions: EventOptions = {
 };
 
 export function defaultEventName(property: string) {
-  return toKebapCase(property).replace(/^on-/,'');
+  return toKebapCase(property).replace(/^on-/,'').replace(/-event$/, '');
 }
 
 /**
@@ -34,5 +36,32 @@ export function defaultEventName(property: string) {
 export function Event(opts?: EventOptions): PropertyDecorator {
   return function<T>(target, propertyKey) {
     const options = Object.assign({}, DefaultEventOptions, {name: defaultEventName(propertyKey)}, opts);
+    addExtension(target, new EventExtension(options, propertyKey));
+  }
+}
+
+export class EventExtension implements ComponentExtension<Webcomponent> {
+  constructor(public options: EventOptions, private propertyKey: string | symbol) {}
+
+  construct(cls: Constructor<Webcomponent>, instance: Webcomponent) {
+    Object.defineProperty(instance, this.propertyKey, {
+      value: new EventEmitter<any>(this.options, instance),
+      writable: false,
+      configurable: false,
+      enumerable: false
+    });
+  }
+}
+
+export class EventEmitter<T> {
+  constructor(public options: EventOptions, private source: Webcomponent) {}
+  emit(data: T) {
+    return this.source.dispatchEvent(new CustomEvent(this.options.name, Object.assign({}, this.options, {detail: data})));
+  }
+  attach(fn: (ev: CustomEvent<T>) => void) {
+    return this.source.addEventListener(this.options.name, fn);
+  }
+  detach(fn: (ev: CustomEvent<T>) => void) {
+    return this.source.removeEventListener(this.options.name, fn);
   }
 }
