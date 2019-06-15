@@ -93,5 +93,11 @@ export interface Webcomponent extends HTMLElement {
    */
   _setAttributes(newAttrs: {[key: string]: string | boolean}): this;
   _setAttributes(mutator: (properties: {[key: string]: string | boolean}) => {[key: string]: string | boolean} | Promise<{[key: string]: string | boolean}>): this;
+
+
+  /**
+   * Request re-rendering the component
+   */
+  _requestRerender(): void;
   //</editor-fold>
 }
