@@ -23,7 +23,7 @@
   - [x] Inherit (Untested)
   - [x] Inject (Untested)
   - [ ] Model
-  - [ ] Parent
+  - [x] Parent
   - [x] Prop (Untested)
   - [ ] Query
   - [ ] State
