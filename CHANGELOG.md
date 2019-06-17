@@ -1,5 +1,16 @@
 ## Changelog
 
+### v0.0.5
+- add state decorator logic and property change notification [[182e4a]](commits/7eafd22f19b74e0f57f563f2b76ae8494b182e4a)
+- add query decorator logic [[8cc5fb]](commits/e2cc8e34439a94c761872313e5655cccbe8cc5fb)
+- update roadmap... again [[c0db24]](commits/fab3ca2b3384c8536afc51edfbeb97065ec0db24)
+- update roadmap [[74f593]](commits/d7437649d8e6d42fba47ae7020b19165b074f593)
+- add parent decorator logic [[db83e9]](commits/3bbfcbb181654032ef68efbba20c45125edb83e9)
+- add roadmap [[a4235d]](commits/c1a51a4ef11c9cecd19a2fc94e356465fca4235d)
+- add injectable and inject logic [[0bce11]](commits/d656b60efd318c59d1f2686127a6d177ce0bce11)
+- remove postpublish hook [[08956d]](commits/e0883882c0f93109b7225e9504675c7c7208956d)
+- update authors and changelog [[8afbff]](commits/dc9440f304cb16a332cfaee6e891b39b128afbff)
+
 ### v0.0.4
 - add inherit sync and parent discovery logic [[5e8b59]](commits/f54bb88e46db057b60c0137bc8b84245e45e8b59)
 - add event emitter logic [[756c45]](commits/d91b7be5908c9bf7e56614cadc7b1b312b756c45)
@@ -38,4 +49,4 @@
 - 0.0.2-0 [[8d443e]](commits/8016cc2be930acf7af4cfb4cd4d650e01d8d443e)
 - Initial commit [[17de66]](commits/44324b3366ad6b6e72e808e14f830c355217de66)
 
-###### Generated on 2019-06-15T18:40:08.028Z | Made with @propero/ngm
+###### Generated on 2019-06-17T23:08:39.843Z | Made with @propero/ngm
