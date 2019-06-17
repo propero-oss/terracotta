@@ -34,7 +34,7 @@ export function Parent(opts?: ParentOptions): PropertyDecorator {
   }
 }
 
-export function getParentOf(element: HTMLElement, options: ParentOptions): HTMLElement {
+function getParentOf(element: HTMLElement, options: ParentOptions): HTMLElement {
   if (!options.selector) return element.parentNode as HTMLElement;
   if (!options.walkDom) return element.closest(options.selector) as HTMLElement;
   let levels = options.levels;
