@@ -2,6 +2,8 @@ import {toKebapCase} from "../../util";
 import {addExtension, ComponentExtension} from "../../component/extension";
 import {Constructor, Webcomponent} from "../../types";
 import "reflect-metadata";
+import {NotifyEvent} from "../../properties/notify";
+import {Stages} from "../../constants";
 
 /**
  * @typedef PropertyOptions
@@ -90,6 +92,8 @@ export class PropertyExtension implements ComponentExtension<Webcomponent> {
       const val = instance.getAttribute(this.opts.attribute);
       const type = this.opts.type;
       instance[this.property] = this.opts.parser(val, cls, this.property, type);
+      if (this.opts.notify)
+        instance.dispatchEvent(new NotifyEvent(instance[this.property], undefined, Stages.PROPERTY));
     }
   }
 
@@ -102,6 +106,8 @@ export class PropertyExtension implements ComponentExtension<Webcomponent> {
       instance.removeAttribute(this.opts.attribute);
     else
       instance.setAttribute(this.opts.attribute, val == true ? this.opts.attribute : val as string);
+    if (this.opts.notify)
+      instance.dispatchEvent(new NotifyEvent(newVal, oldVal, Stages.PROPERTY));
   }
 
   afterAttributeChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string, oldVal: string, newVal: string) {

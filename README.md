@@ -26,7 +26,7 @@
   - [x] Parent (Untested)
   - [x] Prop (Untested)
   - [x] Query (Untested)
-  - [ ] State 
+  - [x] State (Untested)
 #### Models
 - [ ] Clientside Models
   - [ ] Generic Data Model
