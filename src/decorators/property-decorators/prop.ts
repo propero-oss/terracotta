@@ -3,7 +3,7 @@ import {addExtension, ComponentExtension} from "../../component/extension";
 import {Constructor, Webcomponent} from "../../types";
 import "reflect-metadata";
 import {NotifyEvent} from "../../properties/notify";
-import {Stages} from "../../constants";
+import {PROPERTY_TYPES, Stages} from "../../constants";
 
 /**
  * @typedef PropertyOptions
@@ -79,6 +79,8 @@ export function Prop(opts?: PropertyOptions): PropertyDecorator {
         parser: defaultAttributeParser,
         serializer: defaultAttributeSerializer,
       }, opts);
+    if (!target[PROPERTY_TYPES]) target[PROPERTY_TYPES] = {};
+    target[PROPERTY_TYPES][propertyKey] = options.type;
     addExtension(target, new PropertyExtension(options, propertyKey));
   }
 }

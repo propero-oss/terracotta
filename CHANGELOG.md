@@ -1,5 +1,16 @@
 ## Changelog
 
+### v0.0.8
+- add validator to clock example [[60daf5]](commits/c4b0d5f55291b798340c3e87f1127838a160daf5)
+- update roadmap [[ef1d9f]](commits/1ac6cd00efedd20d9e3431336949da4a19ef1d9f)
+- require beforePropertyChange and beforeAttributeChange to return the new value [[71fec1]](commits/06bb14779fa91b5b0948b3ee8795f6236371fec1)
+- add watch method decorator logic [[a49c65]](commits/659fb5c255d0f7a900fe6469b18ff9423ba49c65)
+- add validate method decorator logic [[2addf0]](commits/ebf629ddad7f012a8fe335959f5c992c042addf0)
+- define type metadata for properties [[bcc0fc]](commits/7066f4c1c5e2130dc748a66a2699568794bcc0fc)
+- remove debounce options from listen decorator [[8c8080]](commits/08301d4d826009c4cb87e9f5c5e88f9c1b8c8080)
+- automatically build project before deployment [[36c6eb]](commits/fa0292b79ca75f59a8ee0086159013e93b36c6eb)
+- update authors and changelog [[7c29c9]](commits/049b84558a809710d8d37ee38da290e18b7c29c9)
+
 ### v0.0.6
 - add listen method decorator logic [[b733cf]](commits/7a36807d2397b507f7369fd4ee20090fc3b733cf)
 - add autobound decorator functionality [[2ab375]](commits/c2418c6bc9dcfc38ec4a4a2ce77b77b9dd2ab375)
@@ -55,4 +66,4 @@
 - 0.0.2-0 [[8d443e]](commits/8016cc2be930acf7af4cfb4cd4d650e01d8d443e)
 - Initial commit [[17de66]](commits/44324b3366ad6b6e72e808e14f830c355217de66)
 
-###### Generated on 2019-06-18T00:33:55.834Z | Made with @propero/ngm
+###### Generated on 2019-06-18T18:40:01.646Z | Made with @propero/ngm

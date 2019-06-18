@@ -7,9 +7,9 @@ export interface ComponentExtension<T extends Webcomponent> {
   register?(cls: Constructor<T>);
   construct?(cls: Constructor<T>, instance: T);
   connect?(cls: Constructor<T>, instance: T);
-  beforePropertyChange?(cls: Constructor<T>, instance: T, key: string | symbol, oldVal: any, newVal: any);
+  beforePropertyChange?(cls: Constructor<T>, instance: T, key: string | symbol, oldVal: any, newVal: any): any;
   afterPropertyChange?(cls: Constructor<T>, instance: T, key: string | symbol, oldVal: any, newVal: any);
-  beforeAttributeChange?(cls: Constructor<T>, instance: T, key: string, oldVal: string, newVal: string);
+  beforeAttributeChange?(cls: Constructor<T>, instance: T, key: string, oldVal: string, newVal: string): any;
   afterAttributeChange?(cls: Constructor<T>, instance: T, key: string, oldVal: string, newVal: string);
   beforeRender?(cls: Constructor<T>, instance: T);
   afterRender?(cls: Constructor<T>, instance: T);

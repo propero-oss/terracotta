@@ -4,17 +4,24 @@
  *  - newVal: The new value
  *  - oldVal: The value before it was modified
  *  - property: The property that was changed
- *  - stage: The stage at which it was changed. It can be one of the following:
- *    - attr: changed by attribute change
- *    - model: changed by model change
- *    - state: changed by state change
- *    - prop: changed by property change
  * @param {string} property The property to watch
  * @decorator
  */
+import {addExtension, ComponentExtension} from "../../component";
+import {Constructor, Webcomponent} from "../../types";
+
 export function Watch(property: string): MethodDecorator {
   return function (target, propertyKey, descriptor) {
+    addExtension(target, new WatchExtension(property, propertyKey));
     return descriptor;
   }
 }
 
+export class WatchExtension implements ComponentExtension<Webcomponent> {
+  constructor(private property: string, private propertyKey: string | symbol) {}
+  afterPropertyChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string | symbol, oldVal: any, newVal: any) {
+    if (key !== this.property) return;
+    const watch = instance[this.propertyKey].bind(instance);
+    watch(newVal, oldVal, key);
+  }
+}

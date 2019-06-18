@@ -1,4 +1,4 @@
-import {Autobound, Component, Prop, State, Watch} from "..";
+import {Autobound, Component, Prop, State, Validate, Watch} from "..";
 
 
 @Component()
@@ -19,6 +19,15 @@ export class HTMLTerraClockElement extends HTMLElement {
       // @ts-ignore
       this.intervalId = setInterval(this.doTick, 1000);
     }
+  }
+
+  @Validate("date")
+  validateDate(newVal: Date, oldVal?: Date, property?: string, type?: Function) {
+
+    const val = new Date(newVal);
+    val.setSeconds(0);
+    if (val.getFullYear() > 2020) throw new RangeError("2020 ist nicht supported");
+    return val;
   }
 
   @Autobound()
