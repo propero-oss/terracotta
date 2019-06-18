@@ -10,6 +10,11 @@ export interface Webcomponent extends HTMLElement {
   hostData?: any;
 
   /**
+   * The host element or shadow root to render to.
+   */
+  hostElementRoot?: HTMLElement | ShadowRoot;
+
+  /**
    * Render the component using JSX and the provided static function h()
    * @param {Function} h The JSX render function
    */

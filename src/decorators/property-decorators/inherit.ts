@@ -39,7 +39,7 @@ export function Inherit(opts?: InheritOptions): PropertyDecorator {
   }
 }
 
-export function getParentOf(element: HTMLElement, options: InheritOptions): HTMLElement {
+function getParentOf(element: HTMLElement, options: InheritOptions): HTMLElement {
   if (!options.selector) return element.parentNode as HTMLElement;
   if (!options.walkDom) return element.closest(options.selector) as HTMLElement;
   let levels = options.levels;
