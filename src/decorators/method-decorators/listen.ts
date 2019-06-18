@@ -2,9 +2,6 @@
  * @typedef ListenOptions
  * @property {string|Element} [target='host'] A css selector or one of the following: host, document, window, parent or an html element. All css selectors are evaluated from the host element as its root. This can also directly be set in the event string by prefixing it to the event string, followed by an '@' symbol. e.g.: <code>parent@change</code> or <code>.item:not(:first-child)@keyup.</code>.
  * @property {boolean} [once=false] If the event handler should only be registered once on connection and unregistered at component disconnection. Useful for selectors outside of the component scope, such as window, parent, document, etc.
- * @property {number} [debounce] The number of milliseconds this handler will be blocked for after every execution.
- * @property {number} [debuffer] The number of milliseconds this handler will be executed at after every event emission, with subsequent event emissions within the debuffer span resetting the delay.
- * @property {number} [delay] The number of milliseconds every execution will be delayed for.
  */
 import {addExtension, ComponentExtension} from "../../component";
 import {Constructor, Webcomponent} from "../../types";
@@ -14,9 +11,6 @@ export interface ListenOptions {
   event?: string;
   target?: string | Element;
   once?: boolean;
-  debounce?: number;
-  debuffer?: number;
-  delay?: number;
 }
 
 export const DefaultListenOptions: ListenOptions = {
