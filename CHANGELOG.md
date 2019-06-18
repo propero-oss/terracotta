@@ -1,5 +1,11 @@
 ## Changelog
 
+### v0.0.6
+- add listen method decorator logic [[b733cf]](commits/7a36807d2397b507f7369fd4ee20090fc3b733cf)
+- add autobound decorator functionality [[2ab375]](commits/c2418c6bc9dcfc38ec4a4a2ce77b77b9dd2ab375)
+- resolve duplicate exported member getParentOf [[bdb866]](commits/b589a1278ced15c658e71d0e9906b4bc0cbdb866)
+- update authors and changelog [[80b081]](commits/bedb35283ff89d56d8546708d87734b8ac80b081)
+
 ### v0.0.5
 - add state decorator logic and property change notification [[182e4a]](commits/7eafd22f19b74e0f57f563f2b76ae8494b182e4a)
 - add query decorator logic [[8cc5fb]](commits/e2cc8e34439a94c761872313e5655cccbe8cc5fb)
@@ -49,4 +55,4 @@
 - 0.0.2-0 [[8d443e]](commits/8016cc2be930acf7af4cfb4cd4d650e01d8d443e)
 - Initial commit [[17de66]](commits/44324b3366ad6b6e72e808e14f830c355217de66)
 
-###### Generated on 2019-06-17T23:08:39.843Z | Made with @propero/ngm
+###### Generated on 2019-06-18T00:33:55.834Z | Made with @propero/ngm
