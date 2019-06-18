@@ -14,7 +14,7 @@
   - [ ] Route
   - [ ] Controller
 - [ ] Method Decorators
-  - [ ] Autobound
+  - [x] Autobound (Untested)
   - [ ] Listen
   - [ ] Validate
   - [ ] Watch
