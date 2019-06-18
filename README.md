@@ -15,7 +15,7 @@
   - [ ] Controller
 - [ ] Method Decorators
   - [x] Autobound (Untested)
-  - [ ] Listen
+  - [x] Listen (Untested)
   - [ ] Validate
   - [ ] Watch
 - [ ] Property Decorators
