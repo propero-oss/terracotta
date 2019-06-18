@@ -13,11 +13,11 @@
   - [x] Injectable (Untested)
   - [ ] Route
   - [ ] Controller
-- [ ] Method Decorators
+- [x] Method Decorators (Untested)
   - [x] Autobound (Untested)
   - [x] Listen (Untested)
-  - [ ] Validate
-  - [ ] Watch
+  - [x] Validate (Untested)
+  - [x] Watch (Untested)
 - [ ] Property Decorators
   - [x] Event (Untested)
   - [x] Inherit (Untested)
