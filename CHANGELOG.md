@@ -1,5 +1,11 @@
 ## Changelog
 
+### v0.0.9
+- move examples outside of source dir [[0b9a50]](commits/09c1d2b402b6a2d65dabb3024db18b5ef10b9a50)
+- update dependencies [[912955]](commits/420c189205a9aa33130c7701548b683220912955)
+- add base class mixin util for typings and mixins [[9dd783]](commits/2a070381f56564e6b6ab71d9fce55586599dd783)
+- update authors and changelog [[2d233e]](commits/02f2f53e3b3b6398777c747ab4bef222ba2d233e)
+
 ### v0.0.8
 - add validator to clock example [[60daf5]](commits/c4b0d5f55291b798340c3e87f1127838a160daf5)
 - update roadmap [[ef1d9f]](commits/1ac6cd00efedd20d9e3431336949da4a19ef1d9f)
@@ -66,4 +72,4 @@
 - 0.0.2-0 [[8d443e]](commits/8016cc2be930acf7af4cfb4cd4d650e01d8d443e)
 - Initial commit [[17de66]](commits/44324b3366ad6b6e72e808e14f830c355217de66)
 
-###### Generated on 2019-06-18T18:40:01.646Z | Made with @propero/ngm
+###### Generated on 2019-06-21T19:31:06.508Z | Made with @propero/ngm
