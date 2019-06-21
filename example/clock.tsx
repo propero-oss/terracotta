@@ -34,7 +34,7 @@ export class HTMLTerraClockElement extends Terra(HTMLElement, TickingMixin) {
     return val;
   }
 
-  // @Autobound is inherited
+  @Autobound()
   doTick() {
     this.date = new Date();
   }
