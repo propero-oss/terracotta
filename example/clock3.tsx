@@ -1,8 +1,9 @@
-import {Autobound, Component, Prop, State, Validate, Watch} from "..";
+import {Autobound, Component, Prop, State, Terra, Validate, Watch} from "../src";
 
 
+// This class won't have nice types because sadly decorators can't change class types (yet)
 @Component()
-export class HTMLTerraClockElement extends HTMLElement {
+export class HTMLTerraClock3Element extends HTMLElement {
 
   @Prop({mutable: true}) date: Date = new Date();
   @Prop({mutable: true}) tick: boolean = false;
@@ -26,7 +27,7 @@ export class HTMLTerraClockElement extends HTMLElement {
 
     const val = new Date(newVal);
     val.setSeconds(0);
-    if (val.getFullYear() > 2020) throw new RangeError("2020 ist nicht supported");
+    if (val.getFullYear() > 2020) throw new RangeError("2020 not supported");
     return val;
   }
 
