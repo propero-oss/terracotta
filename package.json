@@ -1,6 +1,6 @@
 {
   "name": "terracotta",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Typescript Decorators for Webcomponents",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
