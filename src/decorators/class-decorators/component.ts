@@ -3,9 +3,6 @@ import {Constructor} from "../../types/constructor";
 import {toKebapCase} from "../../util";
 import {h} from "../../static";
 import {getExtensions, mergeObservedAttributes, mergeObservedProperties} from "../../component/extension";
-import {PROPERTIES, Stages} from "../../constants";
-import {Stage} from "../../constants/stage";
-import {lock, locked, unlock} from "../../properties";
 import {createAccessors} from "../../properties/observed-properties";
 
 /**
@@ -33,11 +30,6 @@ export function defaultTagNameForClass(target: Constructor<any>) {
   return toKebapCase(target.name).replace(/^html-/,'').replace(/-element$/, '');
 }
 
-export interface Component<T> {
-  (opts?: ComponentOptions): <T>(target: Constructor<T>) => Constructor<T & Webcomponent>;
-  render: typeof h;
-}
-
 /**
  * Defines a class as a web component. It accepts an options object to configure the component.
  * @param {ComponentOptions} [opts]
@@ -57,13 +49,10 @@ export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T
     createAccessors(target, propertyObserving, mergeObservedProperties(target));
 
     options.registry.define(options.tag, target, options.opts);
-
-
+    console.log(`Registered ${target.name} as ${options.tag}!`);
 
     return target as unknown as Constructor<T & Webcomponent>;
   }
 }
 
 Component.render = h;
-
-

@@ -1,11 +1,8 @@
-import * as Constants_ from "./constants";
-export const Constants = Constants_;
+export * from "./constants";
 
-import * as Types_ from "./types";
-export const Types = Types_;
+export * from "./types";
 
 export * from "./decorators";
-export * from "./metadata";
 export * from "./util";
 export * from "./static";
 export * from "./component";

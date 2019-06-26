@@ -1,13 +1,13 @@
-import {Model} from "../../types";
+import {IModel} from "../../types";
 
 /**
  * @typedef ModelOptions
- * @property {string|Model} [model=""] The model to reflect to and from.
+ * @property {string|IModel} [model=""] The model to reflect to and from.
  * @property {string} [path="/"] The path in the model to reflect to and from.
  * @property {boolean} [rerender=true] If set to true, the component will be re-rendered upon changes to this property.
  */
 export interface ModelOptions<MType> {
-  model?: string | Model<MType>;
+  model?: string | IModel<MType>;
   path?: string;
   rerender?: boolean;
 }

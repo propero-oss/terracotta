@@ -1,5 +1,5 @@
 
 
-export interface Model<T> {
+export interface IModel<T> {
 
 }
