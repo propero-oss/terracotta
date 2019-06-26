@@ -79,7 +79,9 @@
 						<dd><p>{boolean} [singleton=false] If this is set to true, only one instance will ever be constructed and injected.</p>
 						</dd>
 						<dt>property</dt>
-						<dd><p>{string} [factory] The static method used to construct the injectible. It will be passed the component as its first argument and the property name and metadata as argument 2 and 3 respectively.</p>
+						<dd><p>{string} [factory] The static method used to construct the injectible.
+								It will be passed the component as its first argument and the property name and metadata as argument 2 and 3 respectively.
+							Passing arguments is disabled when singleton is set to true.</p>
 						</dd>
 						<dt>property</dt>
 						<dd><p>{boolean} [static=false] If this is set to true, the class itself will be injected instead of instances thereof.</p>
@@ -118,7 +120,7 @@
 					<div class="tsd-signature tsd-kind-icon">factory<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/class-decorators/injectable.ts#L12">decorators/class-decorators/injectable.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/class-decorators/injectable.ts#L14">decorators/class-decorators/injectable.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -128,7 +130,7 @@
 					<div class="tsd-signature tsd-kind-icon">singleton<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/class-decorators/injectable.ts#L11">decorators/class-decorators/injectable.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/class-decorators/injectable.ts#L13">decorators/class-decorators/injectable.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -138,7 +140,7 @@
 					<div class="tsd-signature tsd-kind-icon">static<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/class-decorators/injectable.ts#L13">decorators/class-decorators/injectable.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/class-decorators/injectable.ts#L15">decorators/class-decorators/injectable.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,6 +159,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_decorators_class_decorators_injectable_.injectables.html" class="tsd-kind-icon">Injectables</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">

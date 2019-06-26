@@ -69,6 +69,71 @@
 				<h3 id="install-npm-i-terracotta">Install: <code>npm i terracotta</code></h3>
 				<h3 id="docs"><a href="docs/index.md">Docs</a></h3>
 				<h3 id="examples"><a href="examples/index.md">Examples</a></h3>
+				<h2 id="roadmap">Roadmap</h2>
+				<h4 id="decorators-">Decorators:</h4>
+				<ul>
+					<li><input disabled="" type="checkbox"> Class Decorators<ul>
+							<li><input disabled="" type="checkbox"> Component</li>
+							<li><input disabled="" type="checkbox"> ComponentMixin</li>
+							<li><input checked="" disabled="" type="checkbox"> Injectable (Untested)</li>
+							<li><input disabled="" type="checkbox"> Route</li>
+							<li><input disabled="" type="checkbox"> Controller</li>
+						</ul>
+					</li>
+					<li><input checked="" disabled="" type="checkbox"> Method Decorators (Untested)<ul>
+							<li><input checked="" disabled="" type="checkbox"> Autobound (Untested)</li>
+							<li><input checked="" disabled="" type="checkbox"> Listen (Untested)</li>
+							<li><input checked="" disabled="" type="checkbox"> Validate (Untested)</li>
+							<li><input checked="" disabled="" type="checkbox"> Watch (Untested)</li>
+						</ul>
+					</li>
+					<li><input disabled="" type="checkbox"> Property Decorators<ul>
+							<li><input checked="" disabled="" type="checkbox"> Event (Untested)</li>
+							<li><input checked="" disabled="" type="checkbox"> Inherit (Untested)</li>
+							<li><input checked="" disabled="" type="checkbox"> Inject (Untested)</li>
+							<li><input disabled="" type="checkbox"> Model</li>
+							<li><input checked="" disabled="" type="checkbox"> Parent (Untested)</li>
+							<li><input checked="" disabled="" type="checkbox"> Prop (Untested)</li>
+							<li><input checked="" disabled="" type="checkbox"> Query (Untested)</li>
+							<li><input checked="" disabled="" type="checkbox"> State (Untested)<h4 id="models">Models</h4>
+							</li>
+						</ul>
+					</li>
+					<li><input disabled="" type="checkbox"> Clientside Models<ul>
+							<li><input disabled="" type="checkbox"> Generic Data Model</li>
+							<li><input disabled="" type="checkbox"> Storage Model</li>
+							<li><input disabled="" type="checkbox"> Cookie Model</li>
+							<li><input disabled="" type="checkbox"> WebSQL Model</li>
+							<li><input disabled="" type="checkbox"> I18n (properties)</li>
+							<li><input disabled="" type="checkbox"> XML</li>
+						</ul>
+					</li>
+					<li><input disabled="" type="checkbox"> Async / Serverside Models<ul>
+							<li><input disabled="" type="checkbox"> JSON-API Model</li>
+							<li><input disabled="" type="checkbox"> OData Model<ul>
+									<li><input disabled="" type="checkbox"> V2</li>
+									<li><input disabled="" type="checkbox"> V4</li>
+								</ul>
+							</li>
+							<li><input disabled="" type="checkbox"> Generic Rest<ul>
+									<li><input disabled="" type="checkbox"> JSON</li>
+									<li><input disabled="" type="checkbox"> XML</li>
+									<li><input disabled="" type="checkbox"> CSV</li>
+									<li><input disabled="" type="checkbox"> Custom Parser<h4 id="views">Views</h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><input disabled="" type="checkbox"> XML View</li>
+					<li><input disabled="" type="checkbox"> JSON View</li>
+					<li><input disabled="" type="checkbox"> HTML View</li>
+					<li><input disabled="" type="checkbox"> HAML View<h4 id="helpers">Helpers</h4>
+					</li>
+					<li><input disabled="" type="checkbox"> JSX / h / Component.render</li>
+					<li><input disabled="" type="checkbox"> Tabbing</li>
+					<li><input disabled="" type="checkbox"> Scrolling</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -79,6 +144,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_component_extension_.html">"component/extension"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_component_index_.html">"component/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_constants_index_.html">"constants/index"</a>
@@ -138,43 +206,22 @@
 						<a href="modules/_decorators_property_decorators_state_.html">"decorators/property-<wbr>decorators/state"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_example_clock_.html">"example/clock"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="modules/_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_metadata_component_metadata_.html">"metadata/component-<wbr>metadata"</a>
+						<a href="modules/_mixins_index_.html">"mixins/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_metadata_index_.html">"metadata/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_metadata_inherit_metadata_.html">"metadata/inherit-<wbr>metadata"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_metadata_listen_metadata_.html">"metadata/listen-<wbr>metadata"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_metadata_prop_metadata_.html">"metadata/prop-<wbr>metadata"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_metadata_query_metadata_.html">"metadata/query-<wbr>metadata"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_metadata_state_metadata_.html">"metadata/state-<wbr>metadata"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_metadata_validate_metadata_.html">"metadata/validate-<wbr>metadata"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_metadata_watch_metadata_.html">"metadata/watch-<wbr>metadata"</a>
+						<a href="modules/_mixins_terra_.html">"mixins/terra"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_properties_index_.html">"properties/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_properties_lock_.html">"properties/lock"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_properties_notify_.html">"properties/notify"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_properties_observed_properties_.html">"properties/observed-<wbr>properties"</a>
@@ -195,13 +242,13 @@
 						<a href="modules/_static_tabbing_.html">"static/tabbing"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_imodel_.html">"types/IModel"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_types_constructor_.html">"types/constructor"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_types_index_.html">"types/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_types_model_.html">"types/model"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_types_webcomponent_.html">"types/webcomponent"</a>

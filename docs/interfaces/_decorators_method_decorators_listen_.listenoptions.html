@@ -69,30 +69,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt>typedef</dt>
-						<dd><p>ListenOptions</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{string|Element} [target=&#39;host&#39;] A css selector or one of the following: host, document, window, parent or an html element. All css selectors are evaluated from the host element as its root. This can also directly be set in the event string by prefixing it to the event string, followed by an &#39;@&#39; symbol. e.g.: <code>parent@change</code> or <code>.item:not(:first-child)@keyup.</code>.</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{boolean} [once=false] If the event handler should only be registered once on connection and unregistered at component disconnection. Useful for selectors outside of the component scope, such as window, parent, document, etc.</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{number} [debounce] The number of milliseconds this handler will be blocked for after every execution.</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{number} [debuffer] The number of milliseconds this handler will be executed at after every event emission, with subsequent event emissions within the debuffer span resetting the delay.</p>
-						</dd>
-						<dt>property</dt>
-						<dd><p>{number} [delay] The number of milliseconds every execution will be delayed for.</p>
-						</dd>
-					</dl>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -108,9 +84,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_method_decorators_listen_.listenoptions.html#debounce" class="tsd-kind-icon">debounce</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_method_decorators_listen_.listenoptions.html#debuffer" class="tsd-kind-icon">debuffer</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_method_decorators_listen_.listenoptions.html#delay" class="tsd-kind-icon">delay</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_method_decorators_listen_.listenoptions.html#event" class="tsd-kind-icon">event</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_method_decorators_listen_.listenoptions.html#once" class="tsd-kind-icon">once</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_method_decorators_listen_.listenoptions.html#target" class="tsd-kind-icon">target</a></li>
 							</ul>
@@ -121,32 +95,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="debounce" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> debounce</h3>
-					<div class="tsd-signature tsd-kind-icon">debounce<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="event" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> event</h3>
+					<div class="tsd-signature tsd-kind-icon">event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/method-decorators/listen.ts#L12">decorators/method-decorators/listen.ts:12</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="debuffer" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> debuffer</h3>
-					<div class="tsd-signature tsd-kind-icon">debuffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/method-decorators/listen.ts#L13">decorators/method-decorators/listen.ts:13</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="delay" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> delay</h3>
-					<div class="tsd-signature tsd-kind-icon">delay<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/method-decorators/listen.ts#L14">decorators/method-decorators/listen.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/method-decorators/listen.ts#L11">decorators/method-decorators/listen.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -156,7 +110,7 @@
 					<div class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/method-decorators/listen.ts#L11">decorators/method-decorators/listen.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/method-decorators/listen.ts#L13">decorators/method-decorators/listen.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -166,7 +120,7 @@
 					<div class="tsd-signature tsd-kind-icon">target<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/method-decorators/listen.ts#L10">decorators/method-decorators/listen.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/method-decorators/listen.ts#L12">decorators/method-decorators/listen.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -185,19 +139,16 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_decorators_method_decorators_listen_.listenextension.html" class="tsd-kind-icon">Listen<wbr>Extension</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_decorators_method_decorators_listen_.listenoptions.html" class="tsd-kind-icon">Listen<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_decorators_method_decorators_listen_.listenoptions.html#debounce" class="tsd-kind-icon">debounce</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_decorators_method_decorators_listen_.listenoptions.html#debuffer" class="tsd-kind-icon">debuffer</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_decorators_method_decorators_listen_.listenoptions.html#delay" class="tsd-kind-icon">delay</a>
+								<a href="_decorators_method_decorators_listen_.listenoptions.html#event" class="tsd-kind-icon">event</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_decorators_method_decorators_listen_.listenoptions.html#once" class="tsd-kind-icon">once</a>
