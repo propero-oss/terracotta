@@ -3,11 +3,12 @@
   "version": "0.0.9",
   "description": "Typescript Decorators for Webcomponents",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha",
-    "build": "tsc",
+    "test": "jest",
+    "build": "webpack",
+    "dev": "webpack-dev-server",
     "docs": "typedoc --out docs src",
-    "release:next": "npm run build && npm version prerelease && npm pack && npm publish *.tgz --tag next",
     "authors": "ngm authors --md --out AUTHORS.md",
     "changelog": "ngm changelog --md --out CHANGELOG.md",
     "prepare": "npm run build"
@@ -39,11 +40,17 @@
     "@types/chai": "^4.1.7",
     "@types/jest": "^24.0.15",
     "chai": "^4.2.0",
+    "dts-bundle": "^0.7.3",
     "jest": "^24.8.0",
     "puppeteer": "^1.18.0",
+    "remove-empty-directories": "0.0.1",
+    "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
     "typedoc": "^0.14.2",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.2",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.4",
+    "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13"
