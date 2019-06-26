@@ -1,5 +1,14 @@
 ## Changelog
 
+### v0.1.0
+- update example [[6d3b93]](commits/7f1a191ff1c395dfeb434086e9538adc1b6d3b93)
+- update docs [[df429b]](commits/d99e7788ebf33ba87c123211baa44cf1eddf429b)
+- resove webpack build and typing issues [[84087a]](commits/1a3b7cb8f8a4069219848cac30fcc348fe84087a)
+- migrate from plain tsc to webpack [[9ceb48]](commits/7449f6445a39c91e7cf011e02bab7dd8ca9ceb48)
+- remove metadata typing stubs [[02bc9f]](commits/64af6f823f81dc6651fc70fe6225093c0c02bc9f)
+- fix missing autobound decorator in example [[ce0a82]](commits/1d1afe8d0c92787f30b9efd75229656de9ce0a82)
+- update authors and changelog [[baff00]](commits/23f5315b580721bc7358ce5be08dd9c091baff00)
+
 ### v0.0.9
 - move examples outside of source dir [[0b9a50]](commits/09c1d2b402b6a2d65dabb3024db18b5ef10b9a50)
 - update dependencies [[912955]](commits/420c189205a9aa33130c7701548b683220912955)
@@ -72,4 +81,4 @@
 - 0.0.2-0 [[8d443e]](commits/8016cc2be930acf7af4cfb4cd4d650e01d8d443e)
 - Initial commit [[17de66]](commits/44324b3366ad6b6e72e808e14f830c355217de66)
 
-###### Generated on 2019-06-21T19:31:06.508Z | Made with @propero/ngm
+###### Generated on 2019-06-26T22:18:58.345Z | Made with @propero/ngm
