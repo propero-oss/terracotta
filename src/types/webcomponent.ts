@@ -1,5 +1,4 @@
-import {ComponentMetadata} from "../metadata";
-import {Model} from "./model";
+import {IModel} from "./IModel";
 
 
 export interface Webcomponent extends HTMLElement {
@@ -50,23 +49,17 @@ export interface Webcomponent extends HTMLElement {
   //</editor-fold>
   //<editor-fold desc="Methods">
   /**
-   * Set a model for all @Model bound properties in this component and all child components.
-   * @param {Model} model The model to bind.
+   * Set a model for all @IModel bound properties in this component and all child components.
+   * @param {IModel} model The model to bind.
    * @param {string} [name=''] The name to bind the model under.
    */
-  setModel(model: Model<any>, name?: string): this;
+  setModel(model: IModel<any>, name?: string): this;
 
   /**
    * Get a previously set model if it exists.
    * @param {string} [name='']
    */
-  getModel(name?: string): Model<any>;
-
-  /**
-   * Get all web component metadata set by any decorators.
-   * Can be called both on classes and instances.
-   */
-  getMetadata(): ComponentMetadata;
+  getModel(name?: string): IModel<any>;
 
   /**
    * Get all properties of this component mapped to their respective values.

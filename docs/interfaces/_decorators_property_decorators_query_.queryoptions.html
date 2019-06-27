@@ -76,7 +76,7 @@
 						<dd><p>QueryOptions</p>
 						</dd>
 						<dt>property</dt>
-						<dd><p>{string} [target=&quot;host&quot;] The element to query. It can be one of the following: host, parent, document.</p>
+						<dd><p>{string|Element} [target=&quot;host&quot;] The element to query. It can be one of the following: host, parent, document or an HTMLElement.</p>
 						</dd>
 						<dt>property</dt>
 						<dd><p>{boolean} [once=false] If the selector should only be queried once and every subsequent access should return the same result.</p>
@@ -108,6 +108,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_property_decorators_query_.queryoptions.html#multiple" class="tsd-kind-icon">multiple</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_property_decorators_query_.queryoptions.html#onrender" class="tsd-kind-icon">on<wbr>Render</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_property_decorators_query_.queryoptions.html#once" class="tsd-kind-icon">once</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_property_decorators_query_.queryoptions.html#selector" class="tsd-kind-icon">selector</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_property_decorators_query_.queryoptions.html#target" class="tsd-kind-icon">target</a></li>
 							</ul>
 						</section>
@@ -122,7 +123,7 @@
 					<div class="tsd-signature tsd-kind-icon">multiple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/property-decorators/query.ts#L14">decorators/property-decorators/query.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/property-decorators/query.ts#L17">decorators/property-decorators/query.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -132,7 +133,7 @@
 					<div class="tsd-signature tsd-kind-icon">on<wbr>Render<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/property-decorators/query.ts#L13">decorators/property-decorators/query.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/property-decorators/query.ts#L16">decorators/property-decorators/query.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -142,7 +143,17 @@
 					<div class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/property-decorators/query.ts#L12">decorators/property-decorators/query.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/property-decorators/query.ts#L15">decorators/property-decorators/query.ts:15</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="selector" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> selector</h3>
+					<div class="tsd-signature tsd-kind-icon">selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/property-decorators/query.ts#L18">decorators/property-decorators/query.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -152,7 +163,7 @@
 					<div class="tsd-signature tsd-kind-icon">target<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/ed7235f/src/decorators/property-decorators/query.ts#L11">decorators/property-decorators/query.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/propero-oss/terracotta/blob/1a3b7cb/src/decorators/property-decorators/query.ts#L14">decorators/property-decorators/query.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -171,6 +182,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_decorators_property_decorators_query_.queryextension.html" class="tsd-kind-icon">Query<wbr>Extension</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
@@ -184,6 +198,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_decorators_property_decorators_query_.queryoptions.html#once" class="tsd-kind-icon">once</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_decorators_property_decorators_query_.queryoptions.html#selector" class="tsd-kind-icon">selector</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_decorators_property_decorators_query_.queryoptions.html#target" class="tsd-kind-icon">target</a>

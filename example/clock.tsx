@@ -27,7 +27,6 @@ export class HTMLTerraClockElement extends Terra(HTMLElement, TickingMixin) {
 
   @Validate("date")
   validateDate(newVal: Date, oldVal?: Date, property?: string, type?: Function) {
-
     const val = new Date(newVal);
     val.setSeconds(0);
     if (val.getFullYear() > 2020) throw new RangeError("2020 not supported");

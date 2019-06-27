@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "module": "esnext",
     "target": "es6",
     "sourceMap": true,
     "experimentalDecorators": true,
@@ -9,8 +9,19 @@
     "outDir": "dist",
     "declaration": true,
     "jsx": "react",
-    "jsxFactory": "Component.render"
+    "jsxFactory": "Component.render",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "es7"
+    ]
   },
-  "exclude": ["node_modules"],
-  "include": ["src"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }
