@@ -1,5 +1,7 @@
+const fs = require('fs');
 const path = require('path');
 const pkg = require('./package.json');
+const tsc = require('./tsconfig.json');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const paths = {
@@ -44,7 +46,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new DtsBundlePlugin()
+    new DtsBundlePlugin(),
+    new RemoveEmptyDirsPlugin(),
+    new DtsRemoveTsPathImportsPlugin()
   ]
 };
 
@@ -53,7 +57,6 @@ function DtsBundlePlugin(){}
 DtsBundlePlugin.prototype.apply = function (compiler) {
   compiler.plugin('done', function(){
     const dts = require('dts-bundle');
-    const removeEmpty = require('remove-empty-directories');
     dts.bundle({
       name: pkg.name,
       main: pkg.types,
@@ -61,8 +64,30 @@ DtsBundlePlugin.prototype.apply = function (compiler) {
       indent: '  ',
       newline: '\n',
       removeSource: true,
-      outputAsModuleFolder: false // to use npm in-package typings
+      outputAsModuleFolder: true // to use npm in-package typings
     });
+  });
+};
+
+
+function RemoveEmptyDirsPlugin(){}
+RemoveEmptyDirsPlugin.prototype.apply = function(compiler) {
+  const removeEmpty = require('remove-empty-directories');
+  compiler.plugin('done', function() {
     removeEmpty(paths.dist);
   });
 };
+
+function DtsRemoveTsPathImportsPlugin(){}
+DtsRemoveTsPathImportsPlugin.prototype.apply = function(compiler) {
+  compiler.plugin('done', function() {
+    const regexBase = "import\\s+[^\"'`]*[\"'`]MODULEBASE[^\"'`]*[\"'`]\s*;?[\s]*";
+    const regexes = Object.keys(tsc.compilerOptions.paths).map(path => {
+      return new RegExp(regexBase.replace("MODULEBASE", path.replace('*', '').replace(/\\/g, "\\\\$0")), "g");
+    });
+    const dtsSource = fs.readFileSync(pkg.types).toString('utf8');
+    const stripped = regexes.reduce((src, regex) => src.replace(regex, ''), dtsSource);
+    fs.writeFileSync(pkg.types, stripped);
+  })
+};
+
