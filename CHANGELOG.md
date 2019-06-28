@@ -1,5 +1,12 @@
 ## Changelog
 
+### v0.2.0
+- ignore generated docs [[6fc1b9]](commits/31577a37056968293cc4fcc491702d1ea36fc1b9)
+- remove generated docs from repo [[6e815c]](commits/a5b0556669ea6fdc9508ea63119ebe90756e815c)
+- fix dts-bundle importing tsconfig paths as modules [[80d0c4]](commits/f22d43731d8e8208831412e2e966c93e9380d0c4)
+- refactor paths to start at project base [[d6d41e]](commits/ef64e9c0b868268d1cf17036ffe898705ed6d41e)
+- update authors and changelogs [[a92c3a]](commits/171a467c184b8cd2670e7a23d68ca5bbf9a92c3a)
+
 ### v0.1.0
 - update example [[6d3b93]](commits/7f1a191ff1c395dfeb434086e9538adc1b6d3b93)
 - update docs [[df429b]](commits/d99e7788ebf33ba87c123211baa44cf1eddf429b)
@@ -81,4 +88,4 @@
 - 0.0.2-0 [[8d443e]](commits/8016cc2be930acf7af4cfb4cd4d650e01d8d443e)
 - Initial commit [[17de66]](commits/44324b3366ad6b6e72e808e14f830c355217de66)
 
-###### Generated on 2019-06-26T22:18:58.345Z | Made with @propero/ngm
+###### Generated on 2019-06-28T12:19:21.923Z | Made with @propero/ngm
