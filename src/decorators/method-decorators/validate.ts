@@ -1,6 +1,6 @@
-import {addExtension, ComponentExtension} from "../../component";
-import {Constructor, Webcomponent} from "../../types";
-import {PROPERTY_TYPES} from "../../constants";
+import {addExtension, ComponentExtension} from "@/component";
+import {Constructor, Webcomponent} from "@/types";
+import {PROPERTY_TYPES} from "@/constants";
 
 /**
  * Registers a method to be called before the provided property changes.

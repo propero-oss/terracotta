@@ -1,5 +1,6 @@
 const path = require('path');
 const pkg = require('./package.json');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const paths = {
   src: './src',
@@ -28,7 +29,10 @@ module.exports = {
   },
   resolve: {
     enforceExtension: false,
-    extensions: [".ts",".tsx",".js",".jsx",".json"]
+    extensions: [".ts",".tsx",".js",".jsx",".json"],
+    plugins: [
+      new TsconfigPathsPlugin({})
+    ]
   },
   module: {
     rules: [
@@ -39,7 +43,9 @@ module.exports = {
       }
     ]
   },
-  plugins: [new DtsBundlePlugin()]
+  plugins: [
+    new DtsBundlePlugin()
+  ]
 };
 
 

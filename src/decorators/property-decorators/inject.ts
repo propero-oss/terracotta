@@ -6,9 +6,9 @@
  * @param {any} [meta] any metadata to pass to the injectable factory.
  * @decorator
  */
-import {addExtension, ComponentExtension} from "../../component";
-import {Constructor, Webcomponent} from "../../types";
-import {Injectables} from "..";
+import {addExtension, ComponentExtension} from "@/component";
+import {Constructor, Webcomponent} from "@/types";
+import {Injectables} from "@/decorators";
 
 export function Inject(what: string | Function, meta: any): PropertyDecorator {
   return function (target, propertyKey) {

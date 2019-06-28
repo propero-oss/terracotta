@@ -1,4 +1,4 @@
-import {Constructor} from "../../types/constructor";
+import {Constructor} from "@/types";
 
 /**
  * Defines a partial feature set to be mixed into other components. It can be mixed using the Mixing function like this:

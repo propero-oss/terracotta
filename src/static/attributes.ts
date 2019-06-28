@@ -1,4 +1,4 @@
-import {toKebapCase} from "../util";
+import {toKebapCase} from "@/util";
 
 
 export function classString(attr: any): string {

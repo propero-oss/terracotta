@@ -2,8 +2,8 @@
  * Binds a function to the enclosing component on access.
  * @decorator
  */
-import {addExtension, ComponentExtension} from "../../component";
-import {Webcomponent} from "../../types";
+import {addExtension, ComponentExtension} from "@/component";
+import {Webcomponent} from "@/types";
 
 export function Autobound(): MethodDecorator {
   return function (target, propertyKey, descriptor) {

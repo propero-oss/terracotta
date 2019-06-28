@@ -1,4 +1,4 @@
-import {Stage} from "../constants";
+import {Stage} from "@/constants";
 
 export interface NotificationInfo<T> {
   newVal: T,

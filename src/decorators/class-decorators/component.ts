@@ -1,9 +1,8 @@
-import {Webcomponent} from "../../types/webcomponent";
-import {Constructor} from "../../types/constructor";
-import {toKebapCase} from "../../util";
-import {h} from "../../static";
-import {getExtensions, mergeObservedAttributes, mergeObservedProperties} from "../../component/extension";
-import {createAccessors} from "../../properties/observed-properties";
+import {Webcomponent, Constructor} from "@/types";
+import {toKebapCase} from "@/util";
+import {h} from "@/static";
+import {getExtensions, mergeObservedAttributes, mergeObservedProperties} from "@/component/extension";
+import {createAccessors} from "@/properties/observed-properties";
 
 /**
  * @typedef ComponentOptions

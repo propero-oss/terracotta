@@ -1,6 +1,6 @@
-import {addExtension, ComponentExtension} from "../../component";
-import {Constructor, Webcomponent} from "../../types";
-import {PARENTS} from "../../constants";
+import {addExtension, ComponentExtension} from "@/component";
+import {Constructor, Webcomponent} from "@/types";
+import {PARENTS} from "@/constants";
 
 /**
  * @typedef ParentOptions

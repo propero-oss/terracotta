@@ -3,8 +3,8 @@
  * @property {string|Element} [target='host'] A css selector or one of the following: host, document, window, parent or an html element. All css selectors are evaluated from the host element as its root. This can also directly be set in the event string by prefixing it to the event string, followed by an '@' symbol. e.g.: <code>parent@change</code> or <code>.item:not(:first-child)@keyup.</code>.
  * @property {boolean} [once=false] If the event handler should only be registered once on connection and unregistered at component disconnection. Useful for selectors outside of the component scope, such as window, parent, document, etc.
  */
-import {addExtension, ComponentExtension} from "../../component";
-import {Constructor, Webcomponent} from "../../types";
+import {addExtension, ComponentExtension} from "@/component";
+import {Constructor, Webcomponent} from "@/types";
 import {Autobound} from "./autobound";
 
 export interface ListenOptions {
