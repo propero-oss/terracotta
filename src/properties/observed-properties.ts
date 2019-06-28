@@ -14,7 +14,7 @@ export function createAccessors(target: Constructor<any>, extensions: ComponentE
       set(val: any) {
         if (!this[PROPERTIES]) this[PROPERTIES] = {};
 
-        if (locked(this, prop)) {
+        if (locked(this, prop) === Stages.PROPERTY) {
           this[PROPERTIES][prop] = val;
           return;
         }
