@@ -1,5 +1,13 @@
 ## Changelog
 
+### v0.3.0
+- make components webcomponent spec complient [[f6ba52]](commits/f43de083a02025c93a59844a8238bd109af6ba52)
+- add adopted callbacks [[73e272]](commits/8d811f02bdb592b962332f225384d104d573e272)
+- add Terra mixin doc [[155b21]](commits/9da9af6e27e07d12ec84c651891f1ba9b2155b21)
+- update travis configuration [[1a4820]](commits/7c6fcb4988c4ec27eac3742168743dccad1a4820)
+- add travis for cd [[60c7dd]](commits/fe1121e2d334e5e602cc99ea9c8efbe94c60c7dd)
+- update authors and changelog [[25e0d2]](commits/c61e36568b9319ad2056ee4b97c342a8aa25e0d2)
+
 ### v0.2.0
 - ignore generated docs [[6fc1b9]](commits/31577a37056968293cc4fcc491702d1ea36fc1b9)
 - remove generated docs from repo [[6e815c]](commits/a5b0556669ea6fdc9508ea63119ebe90756e815c)
@@ -88,4 +96,4 @@
 - 0.0.2-0 [[8d443e]](commits/8016cc2be930acf7af4cfb4cd4d650e01d8d443e)
 - Initial commit [[17de66]](commits/44324b3366ad6b6e72e808e14f830c355217de66)
 
-###### Generated on 2019-06-28T12:19:21.923Z | Made with @propero/ngm
+###### Generated on 2019-06-28T23:51:10.986Z | Made with @propero/ngm
