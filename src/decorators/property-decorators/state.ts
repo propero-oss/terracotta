@@ -1,8 +1,7 @@
-import {Constructor} from "../../types/constructor";
-import {addExtension, ComponentExtension} from "../../component";
-import {Webcomponent} from "../../types";
-import {NotifyEvent} from "../../properties/notify";
-import {Stages} from "../../constants";
+import {addExtension, ComponentExtension} from "@/component";
+import {Webcomponent, Constructor} from "@/types";
+import {NotifyEvent} from "@/properties/notify";
+import {Stages} from "@/constants";
 
 /**
  * @typedef StateOptions

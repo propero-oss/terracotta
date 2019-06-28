@@ -1,7 +1,6 @@
-import {Constructor} from "../../types/constructor";
-import {addExtension, ComponentExtension} from "../../component";
-import {Webcomponent} from "../../types";
-import {INHERIT_HANDLERS} from "../../constants";
+import {addExtension, ComponentExtension} from "@/component";
+import {Webcomponent, Constructor} from "@/types";
+import {INHERIT_HANDLERS} from "@/constants";
 
 /**
  * @typedef InheritOptions

@@ -7,8 +7,8 @@
  * @param {string} property The property to watch
  * @decorator
  */
-import {addExtension, ComponentExtension} from "../../component";
-import {Constructor, Webcomponent} from "../../types";
+import {addExtension, ComponentExtension} from "@/component";
+import {Constructor, Webcomponent} from "@/types";
 
 export function Watch(property: string): MethodDecorator {
   return function (target, propertyKey, descriptor) {

@@ -1,9 +1,9 @@
-import {toKebapCase} from "../../util";
-import {addExtension, ComponentExtension} from "../../component/extension";
-import {Constructor, Webcomponent} from "../../types";
+import {toKebapCase} from "@/util";
+import {addExtension, ComponentExtension} from "@/component/extension";
+import {Constructor, Webcomponent} from "@/types";
 import "reflect-metadata";
-import {NotifyEvent} from "../../properties/notify";
-import {PROPERTY_TYPES, Stages} from "../../constants";
+import {NotifyEvent} from "@/properties/notify";
+import {PROPERTY_TYPES, Stages} from "@/constants";
 
 /**
  * @typedef PropertyOptions

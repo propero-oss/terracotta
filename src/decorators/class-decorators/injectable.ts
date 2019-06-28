@@ -1,5 +1,5 @@
-import {Constructor} from "../../types/constructor";
-import {toKebapCase} from "../../util";
+import {Constructor} from "@/types";
+import {toKebapCase} from "@/util";
 
 /**
  * @typedef InjectableOptions

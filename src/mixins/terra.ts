@@ -1,5 +1,5 @@
-import {Constructor, Webcomponent} from "../types";
-import {addExtension, getExtensions} from "../component";
+import {Constructor, Webcomponent} from "@/types";
+import {addExtension, getExtensions} from "@/component";
 
 export function Terra<T extends HTMLElement, K>(cls?: Constructor<T>, ...mixins: Constructor<K>[]): Constructor<T & K & Webcomponent> {
 

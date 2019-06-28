@@ -15,7 +15,11 @@
       "dom.iterable",
       "esnext",
       "es7"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "exclude": [
     "node_modules"

@@ -1,7 +1,7 @@
-import {Constructor} from "../../types/constructor";
-import {addExtension, ComponentExtension} from "../../component";
-import {Webcomponent} from "../../types";
-import {QUERIES} from "../../constants";
+import {Constructor} from "@/types";
+import {addExtension, ComponentExtension} from "@/component";
+import {Webcomponent} from "@/types";
+import {QUERIES} from "@/constants";
 
 /**
  * @typedef QueryOptions

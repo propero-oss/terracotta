@@ -1,7 +1,7 @@
-import {Constructor, Webcomponent} from "../types";
 import "reflect-metadata";
-import {TERRACOTTA} from "../constants";
-import {distinct} from "../static";
+import {Constructor, Webcomponent} from "@/types";
+import {TERRACOTTA} from "@/constants";
+import {distinct} from "@/static";
 
 export interface ComponentExtension<T extends Webcomponent> {
   register?(cls: Constructor<T>);

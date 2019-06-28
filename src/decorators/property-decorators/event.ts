@@ -1,6 +1,6 @@
-import {toKebapCase} from "../../util";
-import {Constructor, Webcomponent} from "../../types";
-import {addExtension, ComponentExtension} from "../../component";
+import {toKebapCase} from "@/util";
+import {Constructor, Webcomponent} from "@/types";
+import {addExtension, ComponentExtension} from "@/component";
 
 /**
  * @typedef EventOptions

@@ -1,6 +1,6 @@
-import {Constructor} from "../types";
-import {ComponentExtension} from "../component/extension";
-import {PROPERTIES, Stages} from "../constants";
+import {Constructor} from "@/types";
+import {ComponentExtension} from "@/component";
+import {PROPERTIES, Stages} from "@/constants";
 import {lock, locked, unlock} from "./lock";
 
 export function createAccessors(target: Constructor<any>, extensions: ComponentExtension<any>[], properties: (string | symbol)[]) {
