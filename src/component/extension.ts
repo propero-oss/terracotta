@@ -13,6 +13,7 @@ export interface ComponentExtension<T extends Webcomponent> {
   afterAttributeChange?(cls: Constructor<T>, instance: T, key: string, oldVal: string, newVal: string);
   beforeRender?(cls: Constructor<T>, instance: T);
   afterRender?(cls: Constructor<T>, instance: T);
+  adopt?(cls: Constructor<T>, instance: T);
   disconnect?(cls: Constructor<T>, instance: T);
   destroy?(cls: Constructor<T>, instance: T);
 
