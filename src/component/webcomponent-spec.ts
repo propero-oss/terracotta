@@ -61,18 +61,15 @@ export function createPropertyAccessors(target: any, extensions: ComponentExtens
  * @param extensions a list of extensions
  */
 export function createAttributeChangedCallback(target: any, extensions: ComponentExtension<Webcomponent>[] = getExtensions(target)) {
-  const interested: Record<string, ComponentExtension<Webcomponent>[]> = {};
-  extensions
-    .filter(ext => ext.observedAttributes && ext.observedAttributes.length)
-    .forEach(ext => ext.observedAttributes.forEach(attr => (interested[attr] || (interested[attr] = []).push(ext))));
+  const observing = bundleByObservedAttributes(extensions);
 
   Object.defineProperty(target.prototype, 'attributeChangedCallback', {
     value: function (this: Webcomponent, attr: string, oldVal: any, newVal: any) {
-      const extensions = interested[attr];
+      const interested = observing[attr];
       const orig = newVal;
 
       if (oldVal === newVal) return;
-      if (!extensions || !extensions.length) {
+      if (!interested || !interested.length) {
         if (this.onAttributeChanged) this.onAttributeChanged(attr, newVal, oldVal);
         return;
       }
@@ -81,7 +78,7 @@ export function createAttributeChangedCallback(target: any, extensions: Componen
 
       lock(this, attr, Stages.ATTRIBUTE);
 
-      newVal = extensions
+      newVal = interested
         .filter(ext => ext.beforeAttributeChange)
         .reduce((val, ext) => ext.beforeAttributeChange(target, this, attr, oldVal, val), newVal);
 
@@ -90,13 +87,21 @@ export function createAttributeChangedCallback(target: any, extensions: Componen
 
       this.onAttributeChanged(attr, newVal, oldVal);
 
-      extensions
+      interested
         .filter(ext => ext.afterAttributeChange)
         .forEach(ext => ext.afterAttributeChange(target, this, attr, oldVal, newVal));
 
       unlock(this, attr);
     }
   });
+}
+
+function bundleByObservedAttributes(extensions: ComponentExtension<Webcomponent>[]) {
+  const interested: Record<string, ComponentExtension<Webcomponent>[]> = {};
+  extensions
+    .filter(ext => ext.observedAttributes && ext.observedAttributes.length)
+    .forEach(ext => ext.observedAttributes.forEach(attr => (interested[attr] || (interested[attr] = []).push(ext))));
+  return interested;
 }
 
 
