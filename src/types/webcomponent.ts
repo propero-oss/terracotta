@@ -38,6 +38,11 @@ export interface Webcomponent extends HTMLElement {
   onDisconnected?();
 
   /**
+   * Called every time an element is moved to a new document
+   */
+  onAdopted?();
+
+  /**
    * Called before every component render.
    */
   onBeforeRendering?();
@@ -98,4 +103,6 @@ export interface Webcomponent extends HTMLElement {
    */
   _requestRerender(): void;
   //</editor-fold>
+
+
 }

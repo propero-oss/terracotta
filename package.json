@@ -1,11 +1,11 @@
 {
   "name": "terracotta",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Typescript Decorators for Webcomponents",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "build": "webpack",
     "dev": "webpack-dev-server",
     "docs": "typedoc --out docs src",
