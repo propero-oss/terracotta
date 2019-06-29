@@ -1,4 +1,11 @@
 # Terracotta Version 1.0.0
+
+[![npm](https://img.shields.io/npm/v/terracotta.svg)](https://www.npmjs.com/package/terracotta)
+[![GitHub issues](https://img.shields.io/github/issues/propero-oss/terracotta.svg)](https://github.com/propero-oss/terracotta/issues)
+[![Travis (.com)](https://img.shields.io/travis/com/propero-oss/terracotta.svg)](https://travis-ci.com/propero-oss/terracotta)
+[![Maintainability](https://api.codeclimate.com/v1/badges/cfedebb171c0baa31416/maintainability)](https://codeclimate.com/github/propero-oss/terracotta/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/cfedebb171c0baa31416/test_coverage)](https://codeclimate.com/github/propero-oss/terracotta/test_coverage)
+
 ###### A Typescript Decorator based Webcomponent Framework
 ### Install: `npm i terracotta`
 ### [Docs](docs/index.md)
@@ -54,3 +61,4 @@
 - [ ] JSX / h / Component.render
 - [ ] Tabbing
 - [ ] Scrolling
+- [ ] DOM Traversal
