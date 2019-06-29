@@ -23,17 +23,19 @@ export function styleString(attr: any): string {
   }
 }
 
+export function membersToPrefixedAttributes(target: any, attrs: any, member: string, prefix: string = member) {
+  if (member in attrs && typeof attrs[member] === "object") {
+    Object.keys(attrs[member]).forEach(key => target[`${prefix}-${toKebapCase(key)}`] = attrs[key]);
+  }
+}
+
 export function normalizeAttributes(attrs: any): any {
   const copy = {...attrs};
   if ("class" in attrs) copy.class = classString(attrs.class);
   if ("style" in attrs) copy.style = styleString(attrs.style);
-  if ("data" in attrs && typeof attrs.data == "object") {
-    Object.keys(attrs.data).forEach(key => copy[`data-${toKebapCase(key)}`] = attrs.data[key]);
-    delete copy.data;
-  }
-  if ("aria" in attrs && typeof attrs.aria == "object") {
-    Object.keys(attrs.aria).forEach(key => copy[`aria-${toKebapCase(key)}`] = attrs.aria[key]);
-    delete copy.aria;
-  }
+  membersToPrefixedAttributes(copy, attrs, "data");
+  membersToPrefixedAttributes(copy, attrs, "aria");
+  delete copy.data;
+  delete copy.aria;
   return copy;
 }
