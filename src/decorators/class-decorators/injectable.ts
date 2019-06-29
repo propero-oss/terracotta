@@ -55,15 +55,11 @@ export class Injectables {
   }
 
   static get(id: string | Function): any {
-    const bundle = this.injectables[this.nameFor(id)];
-    if (!bundle) throw new ReferenceError("No such Injectable: " + id);
-    return bundle.val;
+    return this.bundle(id).val;
   }
 
   static opts(id: string | Function): InjectableOptions {
-    const bundle = this.injectables[this.nameFor(id)];
-    if (!bundle) throw new ReferenceError("No such Injectable: " + id);
-    return bundle.options;
+    return this.bundle(id).options;
   }
 
   static bundle(id: string | Function): ({val: any, options: InjectableOptions}) {
