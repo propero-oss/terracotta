@@ -40,7 +40,7 @@ export function Injectable<T>(name?: string, opts?: InjectableOptions): <T>(targ
 
 
 export class Injectables {
-  private static injectables: {[key: string]: {val: any, options: InjectableOptions}} = {};
+  private static injectables: {[key: string]: {val: any, options: InjectableOptions, name: string}} = {};
   private static singletons: {[key: string]: any};
 
   static nameFor(id: string | Function): string {
@@ -48,9 +48,11 @@ export class Injectables {
   }
 
   static register(id: string | Function, options: InjectableOptions, value: any) {
-    return this.injectables[this.nameFor(id)] = {
+    const name = this.nameFor(id);
+    return this.injectables[name] = {
+      name,
       val: value,
-      options: options
+      options: options,
     };
   }
 
@@ -62,25 +64,28 @@ export class Injectables {
     return this.bundle(id).options;
   }
 
-  static bundle(id: string | Function): ({val: any, options: InjectableOptions}) {
+  static bundle(id: string | Function): ({val: any, options: InjectableOptions, name: string}) {
     const bundle = this.injectables[this.nameFor(id)];
     if (!bundle) throw new ReferenceError("No such Injectable: " + id);
     return bundle;
   }
 
+  static for(id: string | Function, instance: any, property: string | symbol, meta: any) {
+    const {options, val, name} = Injectables.bundle(id);
+    if (options.static) return val;
+    if (options.singleton) {
+      if (Injectables.singletons[name]) return Injectables.singletons[name];
+      return Injectables.singletons[name] = options.factory ? val[options.factory](instance) : new val();
+    } else {
+      return options.factory ? val[options.factory](instance, property, meta) : new val();
+    }
+  }
+
   static inject(id: string | Function, target: any, property: string | symbol, meta: any) {
     Object.defineProperty(target, property, {
       get() {
-        const {options, val} = Injectables.bundle(id);
-        const name = Injectables.nameFor(id);
-        if (options.static) return val;
-        if (options.singleton) {
-          if (Injectables.singletons[name]) return Injectables.singletons[name];
-          return Injectables.singletons[name] = options.factory ? val[options.factory](this) : new val();
-        } else {
-          return options.factory ? val[options.factory](this, property, meta) : new val();
-        }
+        return Injectables.for(id, this, property, meta);
       }
-    })
+    });
   }
 }
