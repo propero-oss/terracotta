@@ -19,10 +19,21 @@ export interface ParentFindOptions {
 export function getParentOf(element: HTMLElement, options: ParentFindOptions = {}): HTMLElement {
   if (!options.selector) return element.parentNode as HTMLElement;
   if (!options.walkDom) return element.closest(options.selector) as HTMLElement;
-  let levels = options.levels;
-  let current: Node & ParentNode = element;
-  while (levels-- && (current = current.parentNode)) {
-    if ("host" in current) current = (current as ShadowRoot).host;
-    if ((current as HTMLElement).matches(options.selector)) return current as HTMLElement;
-  }
+  return walkDom(element, options.selector, options.levels);
+}
+
+function walkDom(el: HTMLElement, selector: string, levels: number) {
+  while (levels-- && (el = parentOf(el) as HTMLElement))
+    if (el.matches(selector))
+      return el;
+}
+
+function isShadowRoot(el: Node & ParentNode): el is ShadowRoot {
+  return el && "host" in el;
+}
+
+function parentOf(el: Node): Node & ParentNode {
+  const parent = el.parentNode;
+  if (isShadowRoot(parent)) return parent.host;
+  return parent;
 }
