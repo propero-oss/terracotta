@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import {Constructor, Webcomponent} from "@/types";
 import {TERRACOTTA} from "@/constants";
-import {distinct} from "@/static";
+import {distinct, flattenAttribute} from "@/static";
 
 export interface ComponentExtension<T extends Webcomponent> {
   register?(cls: Constructor<T>);
@@ -49,17 +49,9 @@ export function mergeExtensions(target: any): ComponentExtension<any>[] {
 }
 
 export function mergeObservedAttributes(target: any): string[] {
-  return mergeExtensions(target)
-    .filter(ext => ext.observedAttributes)
-    .map(ext => ext.observedAttributes)
-    .reduce((all, one) => all.concat(one), [])
-    .filter(distinct());
+  return flattenAttribute(mergeExtensions(target), "observedAttributes").filter(distinct());
 }
 
 export function mergeObservedProperties(target: any): (string | symbol)[] {
-  return mergeExtensions(target)
-    .filter(ext => ext.observedProperties)
-    .map(ext => ext.observedProperties)
-    .reduce((all, one) => all.concat(one), [])
-    .filter(distinct());
+  return flattenAttribute(mergeExtensions(target), "observedProperties").filter(distinct());
 }
