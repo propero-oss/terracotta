@@ -31,5 +31,9 @@ export function normalizeAttributes(attrs: any): any {
     Object.keys(attrs.data).forEach(key => copy[`data-${toKebapCase(key)}`] = attrs.data[key]);
     delete copy.data;
   }
+  if ("aria" in attrs && typeof attrs.aria == "object") {
+    Object.keys(attrs.aria).forEach(key => copy[`aria-${toKebapCase(key)}`] = attrs.aria[key]);
+    delete copy.aria;
+  }
   return copy;
 }
