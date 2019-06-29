@@ -62,39 +62,44 @@ export function createPropertyAccessors(target: any, extensions: ComponentExtens
  */
 export function createAttributeChangedCallback(target: any, extensions: ComponentExtension<Webcomponent>[] = getExtensions(target)) {
   const observing = bundleByObservedAttributes(extensions);
-
   Object.defineProperty(target.prototype, 'attributeChangedCallback', {
-    value: function (this: Webcomponent, attr: string, oldVal: any, newVal: any) {
-      const interested = observing[attr];
-      const orig = newVal;
-
-      if (oldVal === newVal) return;
-      if (!interested || !interested.length) {
-        if (this.onAttributeChanged) this.onAttributeChanged(attr, newVal, oldVal);
-        return;
-      }
-
-      if (locked(this, attr) === Stages.ATTRIBUTE) return;
-
-      lock(this, attr, Stages.ATTRIBUTE);
-
-      newVal = interested
-        .filter(ext => ext.beforeAttributeChange)
-        .reduce((val, ext) => ext.beforeAttributeChange(target, this, attr, oldVal, val), newVal);
-
-      if (orig !== newVal)
-        this.setAttribute(attr, newVal);
-
-      this.onAttributeChanged(attr, newVal, oldVal);
-
-      interested
-        .filter(ext => ext.afterAttributeChange)
-        .forEach(ext => ext.afterAttributeChange(target, this, attr, oldVal, newVal));
-
-      unlock(this, attr);
-    }
+    value: generateAttributeChangedCallback(target, observing)
   });
 }
+
+function generateAttributeChangedCallback(target: any, observing: Record<string, ComponentExtension<Webcomponent>[]>) {
+  return function (this: Webcomponent, attr: string, oldVal: any, newVal: any) {
+
+    const interested = observing[attr];
+    const orig = newVal;
+
+    if (oldVal === newVal) return;
+    if (!interested || !interested.length) {
+      if (this.onAttributeChanged) this.onAttributeChanged(attr, newVal, oldVal);
+      return;
+    }
+
+    if (locked(this, attr) === Stages.ATTRIBUTE) return;
+
+    lock(this, attr, Stages.ATTRIBUTE);
+
+    newVal = interested
+      .filter(ext => ext.beforeAttributeChange)
+      .reduce((val, ext) => ext.beforeAttributeChange(target, this, attr, oldVal, val), newVal);
+
+    if (orig !== newVal)
+      this.setAttribute(attr, newVal);
+
+    this.onAttributeChanged(attr, newVal, oldVal);
+
+    interested
+      .filter(ext => ext.afterAttributeChange)
+      .forEach(ext => ext.afterAttributeChange(target, this, attr, oldVal, newVal));
+
+    unlock(this, attr);
+  }
+}
+
 
 function bundleByObservedAttributes(extensions: ComponentExtension<Webcomponent>[]) {
   const interested: Record<string, ComponentExtension<Webcomponent>[]> = {};
