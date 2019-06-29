@@ -72,10 +72,12 @@ export function createAttributeChangedCallback(target: any, extensions: Componen
       const orig = newVal;
 
       if (oldVal === newVal) return;
-      if (!extensions || !extensions.length || locked(this, attr) === Stages.ATTRIBUTE) {
+      if (!extensions || !extensions.length) {
         if (this.onAttributeChanged) this.onAttributeChanged(attr, newVal, oldVal);
         return;
       }
+
+      if (locked(this, attr) === Stages.ATTRIBUTE) return;
 
       lock(this, attr, Stages.ATTRIBUTE);
 
@@ -88,7 +90,8 @@ export function createAttributeChangedCallback(target: any, extensions: Componen
 
       this.onAttributeChanged(attr, newVal, oldVal);
 
-      extensions.filter(ext => ext.afterAttributeChange)
+      extensions
+        .filter(ext => ext.afterAttributeChange)
         .forEach(ext => ext.afterAttributeChange(target, this, attr, oldVal, newVal));
 
       unlock(this, attr);
