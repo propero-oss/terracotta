@@ -1,6 +1,7 @@
 import {addExtension, ComponentExtension} from "@/component";
 import {Webcomponent, Constructor} from "@/types";
 import {INHERIT_HANDLERS} from "@/constants";
+import {getParentOf} from "@/util";
 
 /**
  * @typedef InheritOptions
@@ -35,17 +36,6 @@ export function Inherit(opts?: InheritOptions): PropertyDecorator {
   return function<T>(target, propertyKey) {
     const options = Object.assign({}, DefaultInheritOptions, {property: propertyKey}, opts);
     addExtension(target, new InheritExtension(options, propertyKey));
-  }
-}
-
-function getParentOf(element: HTMLElement, options: InheritOptions): HTMLElement {
-  if (!options.selector) return element.parentNode as HTMLElement;
-  if (!options.walkDom) return element.closest(options.selector) as HTMLElement;
-  let levels = options.levels;
-  let current: Node & ParentNode = element;
-  while (levels-- && (current = current.parentNode)) {
-    if ("host" in current) current = (current as ShadowRoot).host;
-    if ((current as HTMLElement).matches(options.selector)) return current as HTMLElement;
   }
 }
 
