@@ -71,14 +71,27 @@ export class Injectables {
   }
 
   static for(id: string | Function, instance: any, property: string | symbol, meta: any) {
-    const {options, val, name} = Injectables.bundle(id);
+    const {options, val} = Injectables.bundle(id);
     if (options.static) return val;
-    if (options.singleton) {
-      if (Injectables.singletons[name]) return Injectables.singletons[name];
-      return Injectables.singletons[name] = options.factory ? val[options.factory](instance) : new val();
-    } else {
-      return options.factory ? val[options.factory](instance, property, meta) : new val();
-    }
+    if (options.singleton) return this._singleton(id);
+    return this._instance(id, instance, property, meta);
+  }
+
+  static _singleton(id: string | Function) {
+    const {val, name, options} = this.bundle(id);
+    if (this.singletons[name]) return this.singletons[name];
+    if (options.factory)
+      return this.singletons[name] = val[options.factory]();
+    else
+      return this.singletons[name] = new val();
+  }
+
+  static _instance(id: string | Function, instance: any, property: string | symbol, meta: any) {
+    const {val, options} = this.bundle(id);
+    if (options.factory)
+      return val[options.factory](instance, property, meta);
+    else
+      return new val();
   }
 
   static inject(id: string | Function, target: any, property: string | symbol, meta: any) {
