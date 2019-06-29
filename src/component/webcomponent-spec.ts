@@ -1,4 +1,4 @@
-import {ComponentExtension, getExtensions, mergeObservedAttributes, mergeObservedProperties} from "@/component";
+import {ComponentExtension, getExtensions, mergeObservedAttributes, mergeObservedProperties} from "@/component/index";
 import {Webcomponent} from "@/types";
 import {createAccessors} from "@/properties/observed-properties";
 import {lock, locked, unlock} from "@/properties/lock";
