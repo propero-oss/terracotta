@@ -52,10 +52,16 @@ export class QueryExtension implements ComponentExtension<Webcomponent> {
   }
 
   root(el: Webcomponent) {
-    return this.options.target === "host" ? el.hostElementRoot
-      : this.options.target === "document" ? document
-      : this.options.target === "parent" ? el.parentNode as HTMLElement
-      : this.options.target as HTMLElement;
+    switch (this.options.target) {
+      case "host":
+        return el.hostElementRoot;
+      case "document":
+        return document;
+      case "parent":
+        return el.parentNode;
+      default:
+        return this.options.target as HTMLElement;
+    }
   }
 
   construct(cls: Constructor<Webcomponent>, instance: Webcomponent) {
