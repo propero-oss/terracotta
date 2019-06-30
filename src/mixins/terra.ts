@@ -21,4 +21,3 @@ export function Terra<T extends HTMLElement, K>(cls?: Constructor<T>, ...mixins:
 
   return target as Constructor<T & K & Webcomponent>;
 }
-
