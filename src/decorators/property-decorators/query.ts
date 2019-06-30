@@ -47,29 +47,31 @@ export class QueryExtension implements ComponentExtension<Webcomponent> {
   query(el: Webcomponent) {
     const options = this.options;
     const selector = this.selector;
-    const root = options.target === "host" ? el.hostElementRoot
-      : options.target === "document" ? document
-      : options.target === "parent" ? el.parentNode as HTMLElement
-      : options.target as HTMLElement;
+    const root = this.root(el);
     return options.multiple ? [...root.querySelectorAll(selector)] : root.querySelector(selector);
   }
 
-  construct(cls: Constructor<Webcomponent>, instance: Webcomponent) {
-    const options = this.options;
-    const key = this.propertyKey;
-    const q = this.query.bind(this);
+  root(el: Webcomponent) {
+    return this.options.target === "host" ? el.hostElementRoot
+      : this.options.target === "document" ? document
+      : this.options.target === "parent" ? el.parentNode as HTMLElement
+      : this.options.target as HTMLElement;
+  }
 
-    Object.defineProperty(instance, key, {
-      get() {
-        if (options.once || options.onRender) {
-          if (!this[QUERIES]) this[QUERIES] = {};
-          if (this[QUERIES][key]) return this[QUERIES][key];
-          return q(this);
-        } else {
-          return q(this);
-        }
-      }
+  construct(cls: Constructor<Webcomponent>, instance: Webcomponent) {
+    Object.defineProperty(instance, this.propertyKey, {
+      get: this.queryGetter.bind(this)
     });
+  }
+
+  queryGetter(instance: Webcomponent) {
+    if (this.options.once || this.options.onRender) {
+      if (!this[QUERIES])
+        this[QUERIES] = {};
+      if (this[QUERIES[this.propertyKey]])
+        return this[QUERIES[this.propertyKey]];
+      return this.query(instance);
+    }
   }
 
   afterRender(cls: Constructor<Webcomponent>, instance: Webcomponent) {
