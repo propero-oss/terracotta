@@ -1,6 +1,7 @@
 import {addExtension, ComponentExtension} from "@/component";
 import {Constructor, Webcomponent} from "@/types";
 import {PARENTS} from "@/constants";
+import {getParentOf} from "@/util";
 
 /**
  * @typedef ParentOptions
@@ -31,17 +32,6 @@ export function Parent(opts?: ParentOptions): PropertyDecorator {
   return function<T>(target, propertyKey) {
     const options = Object.assign({}, DefaultParentOptions, opts);
     addExtension(target, new ParentExtension(options, propertyKey));
-  }
-}
-
-function getParentOf(element: HTMLElement, options: ParentOptions): HTMLElement {
-  if (!options.selector) return element.parentNode as HTMLElement;
-  if (!options.walkDom) return element.closest(options.selector) as HTMLElement;
-  let levels = options.levels;
-  let current: Node & ParentNode = element;
-  while (levels-- && (current = current.parentNode)) {
-    if ("host" in current) current = (current as ShadowRoot).host;
-    if ((current as HTMLElement).matches(options.selector)) return current as HTMLElement;
   }
 }
 

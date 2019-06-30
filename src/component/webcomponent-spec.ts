@@ -1,7 +1,6 @@
 import {ComponentExtension, getExtensions, mergeObservedAttributes, mergeObservedProperties} from "@/component";
 import {Webcomponent} from "@/types";
-import {createAccessors} from "@/properties/observed-properties";
-import {lock, locked, unlock} from "@/properties/lock";
+import {createAccessors, lock, locked, unlock} from "@/properties";
 import {Stages} from "@/constants";
 
 /**
@@ -62,39 +61,52 @@ export function createPropertyAccessors(target: any, extensions: ComponentExtens
  * @param extensions a list of extensions
  */
 export function createAttributeChangedCallback(target: any, extensions: ComponentExtension<Webcomponent>[] = getExtensions(target)) {
+  const observing = bundleByObservedAttributes(extensions);
+  Object.defineProperty(target.prototype, 'attributeChangedCallback', {
+    value: generateAttributeChangedCallback(target, observing)
+  });
+}
+
+function generateAttributeChangedCallback(target: any, observing: Record<string, ComponentExtension<Webcomponent>[]>) {
+  return function (this: Webcomponent, attr: string, oldVal: any, newVal: any) {
+
+    const interested = observing[attr];
+    const orig = newVal;
+
+    if (oldVal === newVal) return;
+    if (!interested || !interested.length) {
+      if (this.onAttributeChanged) this.onAttributeChanged(attr, newVal, oldVal);
+      return;
+    }
+
+    if (locked(this, attr) === Stages.ATTRIBUTE) return;
+
+    lock(this, attr, Stages.ATTRIBUTE);
+
+    newVal = interested
+      .filter(ext => ext.beforeAttributeChange)
+      .reduce((val, ext) => ext.beforeAttributeChange(target, this, attr, oldVal, val), newVal);
+
+    if (orig !== newVal)
+      this.setAttribute(attr, newVal);
+
+    this.onAttributeChanged(attr, newVal, oldVal);
+
+    interested
+      .filter(ext => ext.afterAttributeChange)
+      .forEach(ext => ext.afterAttributeChange(target, this, attr, oldVal, newVal));
+
+    unlock(this, attr);
+  }
+}
+
+
+function bundleByObservedAttributes(extensions: ComponentExtension<Webcomponent>[]) {
   const interested: Record<string, ComponentExtension<Webcomponent>[]> = {};
   extensions
     .filter(ext => ext.observedAttributes && ext.observedAttributes.length)
     .forEach(ext => ext.observedAttributes.forEach(attr => (interested[attr] || (interested[attr] = []).push(ext))));
-
-  Object.defineProperty(target.prototype, 'attributeChangedCallback', {
-    value: function (this: Webcomponent, attr: string, oldVal: any, newVal: any) {
-      const extensions = interested[attr];
-      const orig = newVal;
-
-      if (oldVal === newVal) return;
-      if (!extensions || !extensions.length || locked(this, attr) === Stages.ATTRIBUTE) {
-        if (this.onAttributeChanged) this.onAttributeChanged(attr, newVal, oldVal);
-        return;
-      }
-
-      lock(this, attr, Stages.ATTRIBUTE);
-
-      newVal = extensions
-        .filter(ext => ext.beforeAttributeChange)
-        .reduce((val, ext) => ext.beforeAttributeChange(target, this, attr, oldVal, val), newVal);
-
-      if (orig !== newVal)
-        this.setAttribute(attr, newVal);
-
-      this.onAttributeChanged(attr, newVal, oldVal);
-
-      extensions.filter(ext => ext.afterAttributeChange)
-        .forEach(ext => ext.afterAttributeChange(target, this, attr, oldVal, newVal));
-
-      unlock(this, attr);
-    }
-  });
+  return interested;
 }
 
 

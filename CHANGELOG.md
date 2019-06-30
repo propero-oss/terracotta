@@ -1,5 +1,27 @@
 ## Changelog
 
+### v0.3.2
+- reduce complexity of getParent [[aa4fa1]](commits/7e217ff2ff2871e56dc62f6df3c76659f7aa4fa1)
+- lower attributeChangedCallback complexity... again [[76a78d]](commits/6717d085cfb5355668561589be07201fd376a78d)
+- reduce createAttributeChangedCallback complexity [[57d539]](commits/0b9b8d19bdfc34d3616d4f1040b1bb24d357d539)
+- fix onAttributeChanged called on locked attribute [[03c05f]](commits/c8ef405022fa35b789e998ef8d408c732803c05f)
+- lower complexity of Injectables.for [[5de6e2]](commits/3ec075741ec147b5ecfabd9d81593088085de6e2)
+- lower inject complexity [[194bc1]](commits/e344e1fcb36e91be3c09a93d1ce3d6e427194bc1)
+- resolve code duplication in attribute normalization [[782b50]](commits/0a404bb48d0dc6867305c5065f0a6e5ee2782b50)
+- update authors and changelog [[f517b1]](commits/36be80e7c3aa9a48cdcc77099ac6a262c7f517b1)
+
+### v0.3.1
+- fix code duplication in injectable (#12) [[50fcb8]](commits/8d5650fd826362aea50e055c8fe5de0af850fcb8)
+- fix duplicate code in mergeObservedAttributes and -properties [[fa539b]](commits/c926d7af1f1c149065341169d34b14d463fa539b)
+- disable cc test reporter [[f86568]](commits/d190392ffa61a67c9c27b14c820a5b1759f86568)
+- add badges [[ca5736]](commits/d8443189a59d62b8fdaae7e154f88269beca5736)
+- remove duplicate getParentOf declaration [[556d83]](commits/1cffa653d84708a3e76b0ff31f6ef3465d556d83)
+- refactor imports [[f9ff06]](commits/fb736fb103bfe11f7bf14e38c7c2269794f9ff06)
+- refactoring, fix typing for static render on component [[594b7f]](commits/2d05bc0f042dde79d01ca297906e6934a8594b7f)
+- add support for aria objects [[b9b10a]](commits/569d25bd14bce6e9b19831d13306c0e214b9b10a)
+- make jest pass with no tests [[3e0ab9]](commits/da94ea229a0eb01396ced35e1d606177b53e0ab9)
+- update authors and changelog [[8a6df6]](commits/1787763bbe42c659af8de25efd9a7341958a6df6)
+
 ### v0.3.0
 - make components webcomponent spec complient [[f6ba52]](commits/f43de083a02025c93a59844a8238bd109af6ba52)
 - add adopted callbacks [[73e272]](commits/8d811f02bdb592b962332f225384d104d573e272)
@@ -96,4 +118,4 @@
 - 0.0.2-0 [[8d443e]](commits/8016cc2be930acf7af4cfb4cd4d650e01d8d443e)
 - Initial commit [[17de66]](commits/44324b3366ad6b6e72e808e14f830c355217de66)
 
-###### Generated on 2019-06-28T23:51:10.986Z | Made with @propero/ngm
+###### Generated on 2019-06-29T23:17:22.985Z | Made with @propero/ngm

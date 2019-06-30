@@ -2,7 +2,7 @@ import {Webcomponent, Constructor} from "@/types";
 import {toKebapCase} from "@/util";
 import {h} from "@/static";
 import {getExtensions} from "@/component/extension";
-import {createWebcomponentAttributes} from "@/properties";
+import {createWebcomponentAttributes} from "@/component";
 
 /**
  * @typedef ComponentOptions
@@ -29,6 +29,7 @@ export function defaultTagNameForClass(target: Constructor<any>) {
   return toKebapCase(target.name).replace(/^html-/,'').replace(/-element$/, '');
 }
 
+
 /**
  * Defines a class as a web component. It accepts an options object to configure the component.
  * @param {ComponentOptions} [opts]
@@ -51,6 +52,10 @@ export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T
 
     return target as unknown as Constructor<T & Webcomponent>;
   }
+}
+
+export declare namespace Component {
+  export let render: typeof h;
 }
 
 Component.render = h;
