@@ -38,18 +38,23 @@ export function Parent(opts?: ParentOptions): PropertyDecorator {
 export class ParentExtension implements ComponentExtension<Webcomponent> {
   constructor(private options: ParentOptions, private propertyKey: string | symbol) {}
   construct(cls: Constructor<Webcomponent>, instance: Webcomponent) {
-    const options = this.options;
-    const prop = this.propertyKey;
     Object.defineProperty(instance, this.propertyKey, {
-      get() {
-        if (options.once) {
-          if (!this[PARENTS]) this[PARENTS] = {};
-          if (this[PARENTS][prop]) return this[PARENTS][prop];
-          return this[PARENTS][prop] = getParentOf(this, options);
-        } else {
-          return getParentOf(this, options);
-        }
-      }
+      get: this.createGetter(instance)
     });
+  }
+
+  createGetter(instance) {
+    const {options, propertyKey, getOnce} = this;
+    return function() {
+      if (options.once)
+        return getOnce.call(this, instance, propertyKey, options)
+      return getParentOf(instance, options);
+    }
+  }
+
+  getOnce(instance, prop, options) {
+    if (!this[PARENTS]) this[PARENTS] = {};
+    if (this[PARENTS][prop]) return this[PARENTS][prop];
+    return this[PARENTS][prop] = getParentOf(instance, options);
   }
 }
