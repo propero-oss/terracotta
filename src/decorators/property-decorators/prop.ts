@@ -3,7 +3,7 @@ import {toKebapCase} from "@/util";
 import {addExtension, ComponentExtension} from "@/component/extension";
 import {Constructor, Webcomponent} from "@/types";
 import {PROPERTY_TYPES, Stages} from "@/constants";
-import {NotifyEvent, defaultAttributeParser, defaultAttributeSerializer} from "@/properties";
+import {NotifyEvent, defaultAttributeProcessor} from "@/properties";
 
 /**
  * @typedef PropertyOptions
@@ -56,8 +56,8 @@ export function Prop(opts?: PropertyOptions): PropertyDecorator {
       {
         attribute: defaultPropertyAttributeName(propertyKey),
         type: Reflect.getMetadata("design:type", target, propertyKey),
-        parser: defaultAttributeParser,
-        serializer: defaultAttributeSerializer,
+        parser: defaultAttributeProcessor("parser"),
+        serializer: defaultAttributeProcessor("serializer"),
       }, opts);
     if (!target[PROPERTY_TYPES]) target[PROPERTY_TYPES] = {};
     target[PROPERTY_TYPES][propertyKey] = options.type;

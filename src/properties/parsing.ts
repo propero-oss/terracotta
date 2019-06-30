@@ -32,14 +32,10 @@ registerParser(RegExp,
   val => val ? (val as RegExp).source : undefined
 );
 
-export function defaultAttributeSerializer(val: any, cls: any, prop: string | symbol, type: Function) {
-  const {serializer} = getParser(type);
-  if (serializer) return serializer(val, cls, prop, type);
-  throw new TypeError(`No serializer registered for type ${type.name}.`);
-}
-
-export function defaultAttributeParser(val: string | boolean, cls: any, prop: string | symbol, type: Function) {
-  const {parser} = getParser(type);
-  if (parser) return parser(val, cls, prop, type);
-  throw new TypeError(`No parser registered for type ${type.name}.`);
+export function defaultAttributeProcessor(kind: "parser" | "serializer") {
+  return function(val: any, cls: any, prop: string | symbol, type: Function) {
+    const processor = getParser(type)[kind];
+    if (processor) return processor(val, cls, prop, type);
+    throw new TypeError(`No ${kind} registered for type ${type.name}.`);
+  }
 }
