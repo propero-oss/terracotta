@@ -42,12 +42,19 @@ export class ListenExtension implements ComponentExtension<Webcomponent> {
     }
   }
 
+  queryOrGetTarget(instance: Webcomponent) {
+    if (typeof this.options.target === "string")
+      return instance.hostElementRoot.querySelector(this.options.target) as HTMLElement;
+    return this.options.target as HTMLElement;
+  }
+
   target(instance: Webcomponent) {
-    return this.options.target === "document" ? document
-      : this.options.target === "window" ? window
-      : this.options.target === "parent" ? instance.parentNode as HTMLElement
-      : typeof this.options.target === "string" ? instance.hostElementRoot.querySelector(this.options.target) as HTMLElement
-      : this.options.target as HTMLElement;
+    switch(this.options.target) {
+      case "document": return document;
+      case "window": return window;
+      case "parent": return instance.parentNode as HTMLElement;
+      default: return this.queryOrGetTarget(instance);
+    }
   }
 
   attachHandler(instance: Webcomponent) {
