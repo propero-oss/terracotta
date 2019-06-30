@@ -24,10 +24,8 @@ before_deploy:
   - npm shrinkwrap
   - npm pack
   - npm install
-  - npm run authors
-  - npm run changelog
   - git add .
-  - git commit -m "shrinkwrap, update authors and changelog"
+  - git commit -m "shrinkwrap"
 
 deploy:
   provider: npm
