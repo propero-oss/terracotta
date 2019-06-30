@@ -66,7 +66,14 @@ export function Prop(opts?: PropertyOptions): PropertyDecorator {
 }
 
 export class PropertyExtension implements ComponentExtension<Webcomponent> {
-  constructor(private opts: PropertyOptions, private property: string | symbol) {}
+
+  observedAttributes: string[];
+  observedProperties: (string | symbol)[];
+
+  constructor(private opts: PropertyOptions, private property: string | symbol) {
+    this.observedAttributes = ["attr","both"].indexOf(this.opts.sync) != -1 ? [this.opts.attribute] : [];
+    this.observedProperties = ["prop","both"].indexOf(this.opts.sync) != -1 ? [this.property] : [];
+  }
 
   connect(cls: Constructor<Webcomponent>, instance: Webcomponent) {
     if (["init","attr","both"].indexOf(this.opts.sync) == -1) return;
@@ -80,8 +87,6 @@ export class PropertyExtension implements ComponentExtension<Webcomponent> {
   }
 
   afterPropertyChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string | symbol, oldVal: any, newVal: any) {
-    if (key != this.property) return;
-    if (["prop","both"].indexOf(this.opts.sync) == -1) return;
     const type = this.opts.type;
     const val = this.opts.serializer(newVal, cls, key, type);
     if (val == null || val === false)
@@ -93,18 +98,8 @@ export class PropertyExtension implements ComponentExtension<Webcomponent> {
   }
 
   afterAttributeChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string, oldVal: string, newVal: string) {
-    if (key != this.property) return;
-    if (["attr","both"].indexOf(this.opts.sync) == -1) return;
     const val = instance.getAttribute(this.opts.attribute);
     const type = this.opts.type;
     instance[this.property] = this.opts.parser(val, cls, this.property, type);
-  }
-
-  get observedAttributes(): string[] {
-    return ["attr","both"].indexOf(this.opts.sync) != -1 ? [this.opts.attribute] : [];
-  }
-
-  get observedProperties(): (string | symbol)[] {
-    return ["prop","both"].indexOf(this.opts.sync) != -1 ? [this.property] : [];
   }
 }
