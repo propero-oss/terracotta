@@ -68,9 +68,10 @@ export interface Webcomponent extends HTMLElement {
 
   /**
    * Get all properties of this component mapped to their respective values.
+   * @param names the properties to fetch, if unset every iterable property is included
    * @private
    */
-  _getProperties(): {[key: string]: any};
+  _getProperties<K extends keyof this>(names?: K[]): Record<K, this[K]>;
 
   /**
    * Set all given properties to the given respective values. A function can also be given as an argument.
@@ -78,14 +79,15 @@ export interface Webcomponent extends HTMLElement {
    * @param {Function|Object} newProps
    * @private
    */
-  _setProperties(newProps: {[key: string]: any}): this;
-  _setProperties(mutator: (properties: {[key: string]: any}) => {[key: string]: any} | Promise<{[key: string]: any}>): this;
+  _setProperties<K extends keyof this>(newProps: Record<K, this[K]>): this;
+  _setProperties<K extends keyof this>(mutator: (properties: Record<K, this[K]>) => Record<K, this[K]> | Promise<Record<K, this[K]>>): this;
 
   /**
-   * Get all properties of this component mapped to their respective values.
+   * Get all attributes of this component mapped to their respective values.
+   * @param names the attributes to fetch, if unset every iterable attribute is included
    * @private
    */
-  _getAttributes(): {[key: string]: string | boolean};
+  _getAttributes<K extends keyof this>(names?: K[]): Record<K,  string | boolean>;
 
   /**
    * Set all given attributes to the given respective values.
