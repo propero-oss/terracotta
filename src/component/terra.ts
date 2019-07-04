@@ -80,6 +80,17 @@ export function getModelOf(instance: any, name?: string) {
   return models[name || ""];
 }
 
+function createAssigner(fetcher: (...args: any[]) => any, applier: (...args: any[]) => any): (...args: any) => any {
+  return function assigner(instance: any, propsOrFn: any) {
+    if (typeof propsOrFn === "function")
+      propsOrFn = propsOrFn(fetcher(instance));
+    if ("then" in propsOrFn)
+      propsOrFn.then(props => assigner(instance, props));
+    else
+      applier(instance, propsOrFn);
+    return instance;
+  };
+}
 
 
 export function getAttributesOf<T extends HTMLElement, K extends string>(instance: T, names: K[] = instance.getAttributeNames() as any): Record<K, string | boolean> {
@@ -89,19 +100,13 @@ export function getAttributesOf<T extends HTMLElement, K extends string>(instanc
   return map;
 }
 
-
-export function setAttributesOf<T extends HTMLElement>(instance: T, newAttrs: Record<string, string | boolean>): T
-export function setAttributesOf<T extends HTMLElement>(instance: T, mutator: (props: Record<string, string | boolean>) => Record<string, string | boolean>): T
-export function setAttributesOf<T extends HTMLElement>(instance: T, mutator: (props: Record<string, string | boolean>) => Promise<Record<string, string | boolean>>): T
-export function setAttributesOf<T extends HTMLElement>(instance: T, attrsOrFn: any): T {
-  if (typeof attrsOrFn === "function")
-    attrsOrFn = attrsOrFn(getAttributesOf(instance));
-  if ("then" in attrsOrFn)
-    attrsOrFn.then(props => setAttributesOf(instance, props));
-  else
-    setAttrs(instance, attrsOrFn);
-  return instance;
+interface AttributeSetter {
+  <T extends HTMLElement>(instance: T, newAttrs: Record<string, string | boolean>): T;
+  <T extends HTMLElement>(instance: T, mutator: (props: Record<string, string | boolean>) => Record<string, string | boolean>): T;
+  <T extends HTMLElement>(instance: T, mutator: (props: Record<string, string | boolean>) => Promise<Record<string, string | boolean>>): T;
 }
+
+export const setAttributesOf: AttributeSetter = createAssigner(getAttributesOf, setAttrs);
 
 function setAttrs(instance: any, attrs: Record<string, string | boolean>) {
   for (let entry of Object.entries(attrs)) {
@@ -121,19 +126,13 @@ export function getPropertiesOf<T, K extends keyof T>(instance: T, names: K[] = 
   return map;
 }
 
-
-export function setPropertiesOf<T, K extends keyof T>(instance: T, newProps: Record<K, T[K]>): T
-export function setPropertiesOf<T, K extends keyof T>(instance: T, mutator: (props: Record<K, T[K]>) => Record<K, T[K]>): T
-export function setPropertiesOf<T, K extends keyof T>(instance: T, mutator: (props: Record<K, T[K]>) => Promise<Record<K, T[K]>>): T
-export function setPropertiesOf<T>(instance: T, propsOrFn: any): T {
-  if (typeof propsOrFn === "function")
-    propsOrFn = propsOrFn(getPropertiesOf(instance));
-  if ("then" in propsOrFn)
-    propsOrFn.then(props => setPropertiesOf(instance, props));
-  else
-    setProps(instance, propsOrFn);
-  return instance;
+interface PropertySetter {
+  <T, K extends keyof T>(instance: T, newProps: Record<K, T[K]>): T;
+  <T, K extends keyof T>(instance: T, mutator: (props: Record<K, T[K]>) => Record<K, T[K]>): T;
+  <T, K extends keyof T>(instance: T, mutator: (props: Record<K, T[K]>) => Promise<Record<K, T[K]>>): T;
 }
+
+export const setPropertiesOf: PropertySetter = createAssigner(getPropertiesOf, setProps);
 
 function setProps(instance: any, props: Record<string, any>) {
   for (let entry of Object.entries(props))
