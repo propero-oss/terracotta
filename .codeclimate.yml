@@ -1,0 +1,18 @@
+version: "2"
+plugins:
+  editorconfig:
+    enabled: true
+  fixme:
+    enabled: true
+  git-legal:
+    enabled: true
+  nodesecurity:
+    enabled: true
+exclude_patterns:
+  - "dist/"
+  - "node_modules/"
+  - "test/"
+  - "example/"
+  - "**.d.ts"
+  - "**/*.md"
+  - "**/*.config.*"

@@ -20,3 +20,8 @@ export function flattenAttribute<T, K extends keyof T, A extends T[K]>(source: T
   // @ts-ignore
   return flatten(source.filter(one => one[property] && one[property].length).map(one => one[property]))
 }
+
+
+export function mergeObjects<T>(array: T[]): T {
+  return Object.assign({}, ...array);
+}

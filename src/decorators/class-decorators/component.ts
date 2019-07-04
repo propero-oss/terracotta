@@ -3,6 +3,7 @@ import {toKebapCase} from "@/util";
 import {h} from "@/static";
 import {getExtensions} from "@/component/extension";
 import {createWebcomponentAttributes} from "@/component";
+import {createTerraAttributes} from "@/component/terra";
 
 /**
  * @typedef ComponentOptions
@@ -42,6 +43,7 @@ export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T
     const extensions = getExtensions(target);
 
     createWebcomponentAttributes(target, options.tag, extensions);
+    createTerraAttributes(target);
 
     extensions
       .filter(extension => extension.register)
