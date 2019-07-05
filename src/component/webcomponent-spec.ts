@@ -1,22 +1,24 @@
 import {ComponentExtension, getExtensions, mergeObservedAttributes, mergeObservedProperties} from "@/component";
 import {Webcomponent} from "@/types";
 import {createAccessors, lock, locked, unlock} from "@/properties";
-import {Stages} from "@/constants";
+import {HOST, Stages} from "@/constants";
+import {ComponentOptions} from "@/decorators";
 
 /**
  * Create all necessary webcomponent attributes for Terracotta components.
  * @param target the class to extend
- * @param is the component tag name
+ * @param options the component options
  * @param extensions a list of extensions
  */
-export function createWebcomponentAttributes(target: any, is: string, extensions: ComponentExtension<Webcomponent>[] = getExtensions(target)) {
-  createIs(target, is);
+export function createWebcomponentAttributes(target: any, options: ComponentOptions, extensions: ComponentExtension<Webcomponent>[] = getExtensions(target)) {
+  createIs(target, options.tag);
   createObservedAttributes(target);
   createPropertyAccessors(target, extensions);
   createAttributeChangedCallback(target, extensions);
   createConnectedCallback(target, extensions);
   createDisconnectedCallback(target, extensions);
   createAdoptedCallback(target);
+  createHostElementRootGetter(target, options);
 }
 
 /**
@@ -101,6 +103,10 @@ function generateAttributeChangedCallback(target: any, observing: Record<string,
 }
 
 
+/**
+ * Bundle extensions by the attributes they observe
+ * @param extensions the extensions too bundle
+ */
 function bundleByObservedAttributes(extensions: ComponentExtension<Webcomponent>[]) {
   const interested: Record<string, ComponentExtension<Webcomponent>[]> = {};
   extensions
@@ -160,5 +166,33 @@ export function createAdoptedCallback(target: any, extensions: ComponentExtensio
       interested.forEach(ext => ext.adopt(target, this));
       this._requestRerender();
     }
+  });
+}
+
+/**
+ * Create the 'hostElementRoot' getter creating and attaching a shadow root if necessary.
+ * @param target the class to define the getter on
+ * @param options the component options, containing the shadow root parameters
+ */
+export function createHostElementRootGetter(target: any, options: ComponentOptions) {
+  Object.defineProperty(target.prototype, 'hostElementRoot', {
+    get(this: Webcomponent) {
+      if (this[HOST]) return this[HOST];
+      else return this[HOST] = createRoot(this, options);
+    }
+  });
+}
+
+/**
+ * Creates a host element, attaching a shadow root if necessary
+ * @param el the custom element
+ * @param options the component options
+ */
+function createRoot(el: Webcomponent, options: ComponentOptions) {
+  if (!options.shadow) return el;
+  const {mode, delegatesFocus} = options;
+  return el.attachShadow({
+    mode,
+    delegatesFocus
   });
 }

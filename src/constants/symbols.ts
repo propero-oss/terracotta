@@ -6,3 +6,4 @@ export const PARENTS = Symbol("PARENTS");
 export const QUERIES = Symbol("QUERIES");
 export const PROPERTY_TYPES = Symbol("PROPERTY_TYPES");
 export const MODELS = Symbol("MODELS");
+export const HOST = Symbol("HOST");
