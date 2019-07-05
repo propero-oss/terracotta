@@ -34,9 +34,11 @@ export function addExtension(target: any, extension: ComponentExtension<any>) {
   }
 }
 
+
 export function getExtensions(target: any): ComponentExtension<any>[] {
   return mergeExtensions(target);
 }
+
 
 export function mergeExtensions(target: any): ComponentExtension<any>[] {
   const prototypeMeta : ComponentExtension<any>[] = [];
@@ -48,9 +50,11 @@ export function mergeExtensions(target: any): ComponentExtension<any>[] {
   return prototypeMeta;
 }
 
+
 export function mergeObservedAttributes(target: any): string[] {
   return flattenAttribute(mergeExtensions(target), "observedAttributes").filter(distinct());
 }
+
 
 export function mergeObservedProperties(target: any): (string | symbol)[] {
   return flattenAttribute(mergeExtensions(target), "observedProperties").filter(distinct());

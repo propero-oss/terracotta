@@ -7,14 +7,16 @@ import {createTerraAttributes} from "@/component/terra";
 
 /**
  * @typedef ComponentOptions
- * @property {boolean} [shadow=false] If this is set to true, rendering will be done inside of a shadow root element instead of the element itself
- * @property {'open'|'closed'} [mode='open'] What mode the shadow root will be created with. An open shadow root is accessible from the outside. A closed one isn’t.
- * @property {string} [tag] The tag name to register the web component under. If none is defined, the class name converted to kebap-case and stipped of HTML prefix and Element suffix will be used.
- * @property {CustomElementRegistry} [registry] the registry to register the tag in.
+ * @property shadow If this is set to true, rendering will be done inside of a shadow root element instead of the element itself
+ * @property mode What mode the shadow root will be created with. An open shadow root is accessible from the outside. A closed one isn’t.
+ * @property delegatesFocus Whether or not the element delegates focus to its children. This option has no effect if shadow is false.
+ * @property tag The tag name to register the web component under. If none is defined, the class name converted to kebap-case and stipped of HTML prefix and Element suffix will be used.
+ * @property registry the registry to register the tag in.
  */
 export interface ComponentOptions {
   shadow?: boolean;
   mode?: "open" | "closed";
+  delegatesFocus?: boolean;
   tag?: string;
   registry?: CustomElementRegistry,
   opts?: ElementDefinitionOptions,
@@ -42,7 +44,7 @@ export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T
 
     const extensions = getExtensions(target);
 
-    createWebcomponentAttributes(target, options.tag, extensions);
+    createWebcomponentAttributes(target, options, extensions);
     createTerraAttributes(target);
 
     extensions
