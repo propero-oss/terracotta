@@ -1,7 +1,7 @@
 import {IModel, Webcomponent} from "@/types";
 import {h, mergeObjects} from "@/static";
 import {MODELS} from "@/constants";
-import {replaceChildren} from "@/render/element";
+import {replaceChildren} from "@/render";
 
 
 export function createTerraAttributes(target: any) {
