@@ -38,64 +38,88 @@ export function replaceAttributes(el: HTMLElement, attributes: any) {
       .forEach(key => el.setAttribute(key, attributes[key]));
 }
 
+
 export function replaceChildren(el: HTMLElement, children: any[]) {
 
-  const before = slice(el.children).map(el => ({ key: keyOf(el), el }));
-  const after = [];
   const total = children.length;
+  const before = slice(el.children).map(el => ({key: keyOf(el), el}));
+  const after = [];
+
+  let pAfter: any;
+  let pBefore: any;
   let offset = 0;
 
   for (let i = 0; i < total; ++i) {
-    let pbefore = before[i + offset];
-    let pafter = children[i];
+    pBefore = before[i + offset];
+    pAfter = children[i];
 
-    if (!pbefore) {
-      after.push(pafter.render());
+    if (!pBefore) {
+      after.push(pAfter.render());
       continue;
     }
 
-    if (pbefore.key === pafter.key) {
-      after.push(pafter.render(before[i + offset].el));
+    if (isSameElement(pBefore, pAfter)) {
+      after.push(replaceSame(pBefore, pAfter));
       continue;
     }
 
-    let offsetDelta = 0, found = false;
-    do { // Removed
-      pbefore = before[i + offset + ++offsetDelta];
-      if (pbefore.key === pafter.key) {
-        offset += offsetDelta;
-        after.push(pafter.render(pbefore.el));
-        found = true;
-        break;
-      }
-    } while(offsetDelta++ + offset + i < total);
+    const added = getAddedElements(pBefore, children, i, total);
+    if (added.length) {
+      after.push(...added);
+      offset -= added.length;
+      continue;
+    }
 
-    if (found) continue;
-
-    pbefore = before[i + offset];
-
-    offsetDelta = 0;
-    found = false;
-    do { // Added
-      pafter = children[i + offsetDelta];
-      if (pbefore.key === pafter.key) {
-        for (let y = 1; y < offsetDelta; ++y)
-          after.push(children[i + y - 1].render());
-        after.push(pafter.render(pbefore));
-        offset -= offsetDelta;
-        found = true;
-        break;
-      }
-    } while (offset - offsetDelta++ + i >= 0);
-
-    if (found) continue;
-
-    throw new RangeError("WHAT THE FUCK IS GOING ON?");
+    const removed = getRemovedElements(pAfter, before, i + offset, before.length - offset);
+    if (removed.offset > 0) {
+      after.push(removed.el)
+      offset += removed.offset;
+    }
   }
 
   domdiff(el, before, after);
 }
 
+export function isSameElement(el1: any, el2: any): boolean {
+  return keyOf(el1) === keyOf(el2);
+}
+
+export function replaceSame(el1: any, el2: any) {
+  return el2.render(el1);
+}
+
 export function keyOf(el: any): any {
   return el.key != null ? el.key : el.tagName + '#' + el.id;
+}
+
+function getAddedElements(pBefore: any, after: any[], afterOffset: number, total: number) {
+  let pAfter: any;
+
+  for (let i = 0; i + afterOffset < total; ++i) {
+    pAfter = after[i + afterOffset];
+    if (isSameElement(pBefore, pAfter)) {
+      const result = slice(after, afterOffset, i - 1);
+      result.push(replaceSame(pBefore, pAfter));
+      return result;
+    }
+  }
+
+  return [];
+}
+
+function getRemovedElements(pAfter: any, before: any, beforeOffset: number, total: number) {
+  let pBefore: any;
+
+  for (let i = 0; i + beforeOffset < total; ++i) {
+    pBefore = before[beforeOffset + i];
+    if (isSameElement(pBefore, pAfter)) {
+      return {
+        offset: i,
+        el: replaceSame(pBefore, pAfter)
+      }
+    }
+  }
+  return {
+    offset: 0
+  };
 }
