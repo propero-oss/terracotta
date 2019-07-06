@@ -1,6 +1,7 @@
 import {IModel, Webcomponent} from "@/types";
 import {h, mergeObjects} from "@/static";
 import {MODELS} from "@/constants";
+import {replaceChildren} from "@/render/element";
 
 
 export function createTerraAttributes(target: any) {
@@ -141,5 +142,8 @@ function setProps(instance: any, props: Record<string, any>) {
 
 
 export function renderTemplate(template: any, target: any) {
-
+  if (Array.isArray(template))
+    replaceChildren(target, template);
+  else
+    replaceChildren(target, [template]);
 }
