@@ -58,7 +58,35 @@ describe("static > attributes > styleString", () => {
 });
 
 describe("static > attributes > membersToPrefixedAttributes", () => {
+  it("splits all members of an attribute into prefixed individual attributes", () => {
+    const value = {
+      data: { text: "hello", foo: "bar", fooBar: 5 },
+      foo: { bar: "baz" }
+    };
+    const target = {};
+    const expected = {
+      "data-text": "hello",
+      "data-foo": "bar",
+      "data-foo-bar": 5
+    };
+    membersToPrefixedAttributes(target, value, "data");
+    expect(target).toEqual(expected);
+  });
 
+  it("supports custom prefixes", () => {
+    const value = {
+      data: { text: "hello", foo: "bar", fooBar: 5 },
+      foo: { bar: "baz" }
+    };
+    const target = {};
+    const expected = {
+      "test-text": "hello",
+      "test-foo": "bar",
+      "test-foo-bar": 5
+    };
+    membersToPrefixedAttributes(target, value, "data", "test");
+    expect(target).toEqual(expected);
+  })
 });
 
 describe("static > attributes > normalizeAttributes", () => {

@@ -25,7 +25,7 @@ export function styleString(attr: any): string {
 
 export function membersToPrefixedAttributes(target: any, attrs: any, member: string, prefix: string = member) {
   if (member in attrs && typeof attrs[member] === "object") {
-    Object.keys(attrs[member]).forEach(key => target[`${prefix}-${toKebapCase(key)}`] = attrs[key]);
+    Object.keys(attrs[member]).forEach(key => target[`${prefix}-${toKebapCase(key)}`] = attrs[member][key]);
   }
 }
 
