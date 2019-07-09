@@ -1,9 +1,7 @@
 import {Webcomponent, Constructor} from "@/types";
 import {toKebapCase} from "@/util";
-import {h} from "@/static";
-import {getExtensions} from "@/component/extension";
-import {createWebcomponentAttributes} from "@/component";
-import {createTerraAttributes} from "@/component/terra";
+import {getExtensions, createWebcomponentAttributes, createTerraAttributes} from "@/component";
+import {element} from "@/render";
 
 /**
  * @typedef ComponentOptions
@@ -59,7 +57,7 @@ export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T
 }
 
 export declare namespace Component {
-  export let render: typeof h;
+  export let render: typeof element;
 }
 
-Component.render = h;
+Component.render = element;

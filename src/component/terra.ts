@@ -1,5 +1,5 @@
 import {IModel, Webcomponent} from "@/types";
-import {h, mergeObjects} from "@/static";
+import {mergeObjects} from "@/static";
 import {MODELS} from "@/constants";
 import {replaceChildren} from "@/render";
 
@@ -41,7 +41,7 @@ export function createTerraSetProperties(target: any) {
 export function createTerraRequestRerender(target: any) {
   createInstanceMethod(target, "_requestRerender", async function() {
     const root = this.hostElementRoot;
-    renderTemplate(this.render(h), root);
+    renderTemplate(this.render(), root);
   });
 }
 
