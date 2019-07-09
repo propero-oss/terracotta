@@ -1,6 +1,6 @@
 
 
-export function distinct(transformer?: (val: any) => any): (val: any) => boolean {
+export function distinct<T>(transformer?: (val: T) => any): (val: T) => boolean {
   const elements = [];
 
   if (!transformer) return (val => {

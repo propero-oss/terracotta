@@ -11,11 +11,14 @@ import {addExtension, getExtensions} from "@/component";
  */
 export function Terra<T extends HTMLElement, K>(cls?: Constructor<T>, ...mixins: Constructor<K>[]): Constructor<T & K & Webcomponent> {
 
+  const ext = cls || HTMLElement;
+
   // @ts-ignore
-  const target = class extends (cls || HTMLElement) {};
+  const target = class extends ext {};
+
   mixins.forEach(mixin => {
-    Object.assign(target, mixin); // Static
-    Object.assign(target.prototype, mixin.prototype); // Member
+    Object.assign(target, mixin);
+    Object.assign(target.prototype, mixin.prototype);
     getExtensions(mixin).forEach(ext => addExtension(target, ext));
   });
 

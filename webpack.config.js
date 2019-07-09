@@ -19,6 +19,9 @@ module.exports = {
   entry: paths.entry,
   mode: 'development',
   devtool: "inline-source-maps",
+  node: {
+    fs: 'empty'
+  },
   output: {
     filename: 'index.js',
     path: paths.dist

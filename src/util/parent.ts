@@ -19,7 +19,7 @@ export interface ParentFindOptions {
 export function getParentOf(element: HTMLElement, options: ParentFindOptions = {}): HTMLElement {
   if (!options.selector) return element.parentNode as HTMLElement;
   if (!options.walkDom) return element.closest(options.selector) as HTMLElement;
-  return walkDom(element, options.selector, options.levels);
+  return walkDom(element, options.selector, options.levels || Infinity);
 }
 
 function walkDom(el: HTMLElement, selector: string, levels: number) {
