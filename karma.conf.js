@@ -11,8 +11,9 @@ webpackConfig.module.rules.push({
   test: /\.tsx?$/,
   loader: 'istanbul-instrumenter-loader',
   include: path.join(__dirname, 'src'),
-  query: {
-    esModules: true
+  options: {
+    esModules: true,
+    produceSourceMap: true
   },
   enforce: 'post',
   exclude: /(node_modules|\.test\.tsx?$)/
