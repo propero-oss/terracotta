@@ -63,18 +63,9 @@ export function replaceChildren(el: HTMLElement, children: any[]) {
       continue;
     }
 
-    const added = getAddedElements(pBefore, children, i, total);
-    if (added.length) {
-      after.push(...added);
-      offset -= added.length;
-      continue;
-    }
+    offset -= getAddedElements(pBefore, children, i, total, after);
 
-    const removed = getRemovedElements(pAfter, before, i + offset, before.length - offset);
-    if (removed.offset > 0) {
-      after.push(removed.el)
-      offset += removed.offset;
-    }
+    offset += getRemovedElements(pAfter, before, i + offset, before.length - offset, after);
   }
 
   domdiff(el, before, after);
@@ -92,34 +83,32 @@ export function keyOf(el: any): any {
   return el.key != null ? el.key : el.tagName + '#' + el.id;
 }
 
-function getAddedElements(pBefore: any, after: any[], afterOffset: number, total: number) {
+function getAddedElements(pBefore: any, after: any[], afterOffset: number, total: number, result: any[]) {
   let pAfter: any;
 
   for (let i = 0; i + afterOffset < total; ++i) {
     pAfter = after[i + afterOffset];
     if (isSameElement(pBefore, pAfter)) {
-      const result = slice(after, afterOffset, i - 1);
-      result.push(replaceSame(pBefore, pAfter));
-      return result;
+      const parts = slice(after, afterOffset, i - 1);
+      parts.push(replaceSame(pBefore, pAfter));
+      result.push(...parts);
+      return i;
     }
   }
 
-  return [];
+  return 0;
 }
 
-function getRemovedElements(pAfter: any, before: any, beforeOffset: number, total: number) {
+function getRemovedElements(pAfter: any, before: any, beforeOffset: number, total: number, result: any[]) {
   let pBefore: any;
 
   for (let i = 0; i + beforeOffset < total; ++i) {
     pBefore = before[beforeOffset + i];
     if (isSameElement(pBefore, pAfter)) {
-      return {
-        offset: i,
-        el: replaceSame(pBefore, pAfter)
-      }
+      result.push(replaceSame(pBefore, pAfter));
+      return i;
     }
   }
-  return {
-    offset: 0
-  };
+
+  return 0;
 }
