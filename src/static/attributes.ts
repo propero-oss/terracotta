@@ -15,7 +15,7 @@ export function classString(attr: any): string {
 export function styleString(attr: any): string {
   switch (typeof attr) {
     case "string": return attr;
-    case "object": return Array.isArray(attr) ? attr.join(';') : Object.keys(attr).filter( key => !!attr[key]).map(key => `${toKebapCase(key)}:${attr[key]}`).join(' ');
+    case "object": return Array.isArray(attr) ? attr.join(';') : Object.keys(attr).filter( key => null != attr[key]).map(key => `${toKebapCase(key)}:${attr[key]}`).join(';');
     case "function": return styleString(attr());
     case "undefined": return "";
     case "boolean": return "";
