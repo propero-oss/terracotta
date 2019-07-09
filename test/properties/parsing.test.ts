@@ -26,16 +26,16 @@ describe("properties > parsing > getParser", () => {
   it("should parse booleans", () => {
     const {parser, serializer} = getParser(Boolean);
 
-    expect(parser("false", null, "someprop", Boolean)).toBeFalsy();
-    expect(parser("", null, "someprop", Boolean)).toBeFalsy();
-    expect(parser(null, null, "someprop", Boolean)).toBeFalsy();
-    expect(parser(undefined, null, "someprop", Boolean)).toBeFalsy();
-    expect(parser(false, null, "someprop", Boolean)).toBeFalsy();
+    expect(parser("false", null, "prop", Boolean)).toBeFalsy();
+    expect(parser("", null, "prop", Boolean)).toBeFalsy();
+    expect(parser(null, null, "prop", Boolean)).toBeFalsy();
+    expect(parser(undefined, null, "prop", Boolean)).toBeFalsy();
+    expect(parser(false, null, "prop", Boolean)).toBeFalsy();
 
-    expect(parser("true", null, "someprop", Boolean)).toBeTruthy();
-    expect(parser("anything", null, "someprop", Boolean)).toBeTruthy();
-    expect(parser(1, null, "someprop", Boolean)).toBeTruthy();
-    expect(parser(true, null, "someprop", Boolean)).toBeTruthy();
+    expect(parser("true", null, "prop", Boolean)).toBeTruthy();
+    expect(parser("anything", null, "prop", Boolean)).toBeTruthy();
+    expect(parser(1, null, "prop", Boolean)).toBeTruthy();
+    expect(parser(true, null, "prop", Boolean)).toBeTruthy();
 
     expect(serializer(true, null, "prop", Boolean)).toBeTruthy();
     expect(serializer(false, null, "prop", Boolean)).toBeFalsy();
