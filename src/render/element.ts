@@ -63,9 +63,9 @@ export function replaceChildren(el: HTMLElement, children: any[]) {
       continue;
     }
 
-    offset -= getAddedElements(pBefore, children, i, total, after);
+    offset -= getAddedElements(pBefore, children, i, after);
 
-    offset += getRemovedElements(pAfter, before, i + offset, before.length - offset, after);
+    offset += getRemovedElements(pAfter, before, i + offset, after);
   }
 
   domdiff(el, before, after);
@@ -83,10 +83,10 @@ export function keyOf(el: any): any {
   return el.key != null ? el.key : el.tagName + '#' + el.id;
 }
 
-function getAddedElements(pBefore: any, after: any[], afterOffset: number, total: number, result: any[]) {
+function getAddedElements(pBefore: any, after: any[], afterOffset: number, result: any[]) {
   let pAfter: any;
 
-  for (let i = 0; i + afterOffset < total; ++i) {
+  for (let i = 0; i + afterOffset < after.length; ++i) {
     pAfter = after[i + afterOffset];
     if (isSameElement(pBefore, pAfter)) {
       const parts = slice(after, afterOffset, i - 1);
@@ -99,10 +99,10 @@ function getAddedElements(pBefore: any, after: any[], afterOffset: number, total
   return 0;
 }
 
-function getRemovedElements(pAfter: any, before: any, beforeOffset: number, total: number, result: any[]) {
+function getRemovedElements(pAfter: any, before: any[], beforeOffset: number, result: any[]) {
   let pBefore: any;
 
-  for (let i = 0; i + beforeOffset < total; ++i) {
+  for (let i = 0; i + beforeOffset < before.length; ++i) {
     pBefore = before[beforeOffset + i];
     if (isSameElement(pBefore, pAfter)) {
       result.push(replaceSame(pBefore, pAfter));
