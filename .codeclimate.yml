@@ -16,3 +16,4 @@ exclude_patterns:
   - "**.d.ts"
   - "**/*.md"
   - "**/*.config.*"
+  - "**/*.conf.*"
