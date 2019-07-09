@@ -72,6 +72,7 @@ export function replaceChildren(el: HTMLElement, children: any[]) {
 }
 
 export function isSameElement(el1: any, el2: any): boolean {
+  if (el1 === el2) return true;
   return keyOf(el1) === keyOf(el2);
 }
 
