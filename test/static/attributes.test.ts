@@ -90,5 +90,28 @@ describe("static > attributes > membersToPrefixedAttributes", () => {
 });
 
 describe("static > attributes > normalizeAttributes", () => {
-
+  it("should normalize attributes", () => {
+    const value = {
+      data: { text: "hello", foo: "bar", fooBar: 5 },
+      aria: { text: "hello", foo: "bar", fooBar: 5 },
+      style() { return {
+        display: "flex",
+        flexDirection: "row"
+      }; },
+      class() { return ["foo", "bar"]; },
+      foo: "bar"
+    };
+    const expected = {
+      "data-text": "hello",
+      "data-foo": "bar",
+      "data-foo-bar": 5,
+      "aria-text": "hello",
+      "aria-foo": "bar",
+      "aria-foo-bar": 5,
+      "style": "display:flex;flex-direction:row",
+      "class": "foo bar",
+      "foo": "bar"
+    };
+    expect(normalizeAttributes(value)).toEqual(expected);
+  });
 });
