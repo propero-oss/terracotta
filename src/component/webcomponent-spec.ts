@@ -124,7 +124,6 @@ function bundleByObservedAttributes(extensions: ComponentExtension<Webcomponent>
  */
 export function createConnectedCallback(target: any, extensions: ComponentExtension<Webcomponent>[] = getExtensions(target)) {
   const interested = extensions.filter(ext => ext.connect);
-  if (!interested.length) return;
   Object.defineProperty(target.prototype, 'connectedCallback', {
     value: function (this: Webcomponent) {
       interested.forEach(ext => ext.connect(target, this));
@@ -143,7 +142,6 @@ export function createConnectedCallback(target: any, extensions: ComponentExtens
  */
 export function createDisconnectedCallback(target: any, extensions: ComponentExtension<Webcomponent>[] = getExtensions(target)) {
   const interested = extensions.filter(ext => ext.disconnect);
-  if (!interested.length) return;
   Object.defineProperty(target.prototype, 'disconnectedCallback', {
     value: function (this: Webcomponent) {
       interested.forEach(ext => ext.disconnect(target, this));

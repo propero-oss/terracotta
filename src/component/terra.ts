@@ -35,7 +35,7 @@ export function createTerraGetProperties(target: any) {
 }
 
 export function createTerraSetProperties(target: any) {
-  createInstanceMethod(target, "_setPropertiesOf", staticToInstance(setPropertiesOf));
+  createInstanceMethod(target, "_setProperties", staticToInstance(setPropertiesOf));
 }
 
 export function createTerraRequestRerender(target: any) {
