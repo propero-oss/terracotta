@@ -3,7 +3,7 @@ import {Component} from "@/decorators";
 import {addExtension, ComponentExtension} from "../../../src/component";
 import {Constructor, Webcomponent} from "../../../src/types";
 
-describe("decorators > class-decorators > Component", () => {
+describe("decorators > class-decorators > component > Component", () => {
 
   it("can be applied to any class", () => {
     @Component()

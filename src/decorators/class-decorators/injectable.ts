@@ -1,5 +1,6 @@
 import {Constructor} from "@/types";
 import {toKebapCase} from "@/util";
+import {INJECTABLES} from "@/constants";
 
 /**
  * @typedef InjectableOptions
@@ -41,7 +42,7 @@ export function Injectable<T>(name?: string, opts?: InjectableOptions): <T>(targ
 
 export class Injectables {
   private static injectables: {[key: string]: {val: any, options: InjectableOptions, name: string}} = {};
-  private static singletons: {[key: string]: any};
+  private static singletons: {[key: string]: any} = {};
 
   static nameFor(id: string | Function): string {
     return typeof id === "string" ? id : toKebapCase(id.name);
@@ -79,7 +80,7 @@ export class Injectables {
 
   static _singleton(id: string | Function) {
     const {val, name, options} = this.bundle(id);
-    if (this.singletons[name]) return this.singletons[name];
+    if (this.singletons[name] != null) return this.singletons[name];
     if (options.factory)
       return this.singletons[name] = val[options.factory]();
     else
@@ -97,8 +98,20 @@ export class Injectables {
   static inject(id: string | Function, target: any, property: string | symbol, meta: any) {
     Object.defineProperty(target, property, {
       get() {
-        return Injectables.for(id, this, property, meta);
+        const val = Injectables.getInjectableOf(this, id);
+        if (val) return val;
+        return Injectables.setInjectableOf(this, id, Injectables.for(id, this, property, meta));
       }
     });
   }
+
+  static getInjectableOf(target: any, id: string | Function) {
+    return target[INJECTABLES] && target[INJECTABLES][this.nameFor(id)];
+  }
+
+  static setInjectableOf(target: any, id: string | Function, value: any) {
+    return (target[INJECTABLES] || (target[INJECTABLES] = {}))[this.nameFor(id)] = value;
+  }
+
+
 }
