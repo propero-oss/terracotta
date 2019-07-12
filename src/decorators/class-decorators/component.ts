@@ -1,6 +1,6 @@
 import {Webcomponent, Constructor} from "@/types";
 import {toKebapCase} from "@/util";
-import {getExtensions, createWebcomponentAttributes, createTerraAttributes} from "@/component";
+import {getExtensions, createWebcomponentAttributes, createTerraAttributes, ComponentExtension} from "@/component";
 import {element} from "@/render";
 
 /**
@@ -39,8 +39,10 @@ export function defaultTagNameForClass(target: Constructor<any>) {
 export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T>) => Constructor<T & Webcomponent> {
   return function<T>(target: Constructor<T>): Constructor<T & Webcomponent> {
     const options = Object.assign({}, DefaultComponentOptions, {tag: defaultTagNameForClass(target)}, opts);
+    const name = target.name;
 
     const extensions = getExtensions(target);
+    target = constructorWrapperClass(target, extensions);
 
     createWebcomponentAttributes(target, options, extensions);
     createTerraAttributes(target);
@@ -50,7 +52,7 @@ export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T
       .forEach(extension => extension.register(target));
 
     options.registry.define(options.tag, target, options.opts);
-    console.log(`Registered ${target.name} as ${options.tag}!`);
+    console.log(`Registered ${name} as ${options.tag}!`);
 
     return target as unknown as Constructor<T & Webcomponent>;
   }
@@ -61,3 +63,17 @@ export declare namespace Component {
 }
 
 Component.render = element;
+
+export function constructorWrapperClass(target: any, extensions: ComponentExtension<Webcomponent>[]): any {
+  const interested = extensions.filter(ext => ext.construct);
+  if (!interested.length) return target;
+  // @ts-ignore
+  const cls = class extends target {
+    constructor(...args: any[]) {
+      super(...args);
+      interested.forEach(ext => ext.construct(cls as any, this as any));
+    }
+  };
+
+  return cls;
+}

@@ -48,17 +48,24 @@ describe("decorators > class-decorators > component > Component", () => {
     for (let method of methods)
       expect(proto[method]).toBeTruthy(method);
   });
-  it("should register extensions and call their 'register' hook", () => {
+  it("registers extensions and call their 'register' hook", () => {
     let wasCalled = false;
-    class HTMLFifthComponentTestElement {}
+
     class SpecialExtension implements ComponentExtension<Webcomponent> {
       register(cls: Constructor<Webcomponent>) {
-        expect(cls).toEqual(HTMLFifthComponentTestElement);
+        expect(cls).toBeTruthy();
         wasCalled = true;
       }
     }
-    addExtension(HTMLFifthComponentTestElement, new SpecialExtension());
-    Component()(HTMLFifthComponentTestElement);
+
+    function WithSpecialExtension(target) {
+      addExtension(target, new SpecialExtension());
+    }
+
+    @Component()
+    @WithSpecialExtension
+    class HTMLFifthComponentTestElement {}
+
     expect(wasCalled).toBeTruthy();
   });
 });

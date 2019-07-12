@@ -1,6 +1,5 @@
 import "jasmine";
 import {Injectable, Injectables} from "@/decorators";
-import {Inject} from "../../../src/decorators";
 
 describe("decorators > class-decorators > injectable > Injectable", () => {
 
