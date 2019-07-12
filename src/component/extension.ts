@@ -44,13 +44,18 @@ export function mergeExtensions(target: any): ComponentExtension<any>[] {
   const prototypeMeta : ComponentExtension<any>[] = [];
   let current: any = target;
   do {
-    const meta = Object.assign({},
-      Reflect.getOwnMetadata(TERRACOTTA, current),
-      current.prototype ? Reflect.getOwnMetadata(TERRACOTTA, current.prototype) : undefined
-    );
+    const meta = getMetadataOf(current);
     if (meta && meta.extensions) prototypeMeta.push(...meta.extensions);
   } while ((current = Object.getPrototypeOf(current)) != Object && current);
   return prototypeMeta;
+}
+
+export function getMetadataOf(target: any) {
+  if (!target) return {};
+  return Object.assign({},
+    Reflect.getOwnMetadata(TERRACOTTA, target),
+    target.prototype ? Reflect.getOwnMetadata(TERRACOTTA, target.prototype) : undefined
+  );
 }
 
 
