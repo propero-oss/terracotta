@@ -14,9 +14,9 @@ import {PROPERTY_TYPES} from "@/constants";
  * @param {string} property The property to validate
  * @decorator
  */
-export function Validate(property: string): MethodDecorator {
+export function Validate(property: string | symbol): MethodDecorator {
   return function (target, propertyKey, descriptor) {
-    const type = target[PROPERTY_TYPES] ? target[PROPERTY_TYPES][propertyKey] : undefined;
+    const type = target[PROPERTY_TYPES] ? target[PROPERTY_TYPES][property] : Reflect.getMetadata("design:type", target, property);
     addExtension(target, new ValidateExtension(property, propertyKey, type));
     return descriptor;
   }
