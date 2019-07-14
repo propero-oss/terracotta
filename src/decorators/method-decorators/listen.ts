@@ -58,33 +58,31 @@ export class ListenExtension implements ComponentExtension<Webcomponent> {
     }
   }
 
-  attachHandler(instance: Webcomponent) {
+  addOrRemoveListener(instance: Webcomponent, add: boolean) {
     const target = this.target(instance);
+    const method = instance[this.propertyKey];
     if (target)
-      target.addEventListener(this.options.event, instance[this.propertyKey]);
-  }
-
-  detachHandler(instance: Webcomponent) {
-    const target = this.target(instance);
-    if (target)
-      target.removeEventListener(this.options.event, instance[this.propertyKey]);
+      if (add)
+        target.addEventListener(this.options.event, method);
+      else
+        target.removeEventListener(this.options.event, method);
   }
 
   connect(cls: Constructor<Webcomponent>, instance: Webcomponent) {
-    this.attachHandler(instance);
+    this.addOrRemoveListener(instance, true);
   }
 
   beforeRender(cls: Constructor<Webcomponent>, instance: Webcomponent) {
     if (this.options.once) return;
-    this.detachHandler(instance);
+    this.addOrRemoveListener(instance, false);
   }
 
   afterRender(cls: Constructor<Webcomponent>, instance: Webcomponent) {
     if (this.options.once) return;
-    this.attachHandler(instance);
+    this.addOrRemoveListener(instance, true);
   }
 
   disconnect(cls: Constructor<Webcomponent>, instance: Webcomponent) {
-    this.detachHandler(instance);
+    this.addOrRemoveListener(instance, false);
   }
 }
