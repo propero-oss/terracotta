@@ -1,7 +1,6 @@
 import "jasmine";
 import {Component, Listen} from "@/decorators";
-import {Webcomponent} from "../../../src/types";
-import {ListenExtension} from "../../../src/decorators";
+import {Webcomponent} from "@/types";
 
 describe("decorators > method decorators > listen > Listen", () => {
 
