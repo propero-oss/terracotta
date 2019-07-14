@@ -45,7 +45,7 @@ export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T
     target = constructorWrapperClass(target, extensions);
 
     createWebcomponentAttributes(target, options, extensions);
-    createTerraAttributes(target);
+    createTerraAttributes(target, extensions);
 
     extensions
       .filter(extension => extension.register)
@@ -66,7 +66,6 @@ Component.render = element;
 
 export function constructorWrapperClass(target: any, extensions: ComponentExtension<Webcomponent>[]): any {
   const interested = extensions.filter(ext => ext.construct);
-  if (!interested.length) return target;
   // @ts-ignore
   const cls = class extends target {
     constructor(...args: any[]) {

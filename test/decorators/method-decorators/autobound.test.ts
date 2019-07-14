@@ -19,5 +19,28 @@ describe("decorators > method decorators > autobound > Autobound", () => {
     expect(instance.foobar.call(null)).toBe(instance);
   });
 
+  it("should work for multiple methods", () => {
+    @Component()
+    class HTMLAutoboundTest2Element extends HTMLElement {
+      @Autobound()
+      foobar() {
+        return this;
+      }
+
+      @Autobound()
+      baz() {
+        return this;
+      }
+    }
+
+    const proto = HTMLAutoboundTest2Element.prototype;
+    const instance = new HTMLAutoboundTest2Element();
+
+    expect(proto.foobar.call(null)).toBe(null);
+    expect(proto.baz.call(null)).toBe(null);
+    expect(instance.foobar.call(null)).toBe(instance);
+    expect(instance.baz.call(null)).toBe(instance);
+  });
+
 
 });

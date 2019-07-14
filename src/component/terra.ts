@@ -2,10 +2,11 @@ import {IModel, Webcomponent} from "@/types";
 import {mergeObjects} from "@/static";
 import {MODELS} from "@/constants";
 import {replaceChildren} from "@/render";
+import {ComponentExtension, getExtensions} from "@/component/extension";
 
 
-export function createTerraAttributes(target: any) {
-  createTerraRequestRerender(target);
+export function createTerraAttributes(target: any, extensions = getExtensions(target)) {
+  createTerraRequestRerender(target, extensions);
   createTerraGetModel(target);
   createTerraSetModel(target);
   createTerraGetAttributes(target);
@@ -38,10 +39,16 @@ export function createTerraSetProperties(target: any) {
   createInstanceMethod(target, "_setProperties", staticToInstance(setPropertiesOf));
 }
 
-export function createTerraRequestRerender(target: any) {
+export function createTerraRequestRerender(target: any, extensions: ComponentExtension<Webcomponent>[]) {
+  const interestedBefore = extensions.filter(ext => ext.beforeRender);
+  const interestedAfter = extensions.filter(ext => ext.afterRender);
+
   createInstanceMethod(target, "_requestRerender", async function() {
     const root = this.hostElementRoot;
-    renderTemplate(this.render(), root);
+    interestedBefore.forEach(ext => ext.beforeRender(target, this));
+    if (this.render)
+      renderTemplate(this.render(), root);
+    interestedAfter.forEach(ext => ext.afterRender(target, this));
   });
 }
 
