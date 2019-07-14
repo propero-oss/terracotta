@@ -1,9 +1,10 @@
 import "jasmine";
 import {Component, Inject, Injectable} from "@/decorators";
 
-describe("decorators > property decorators > inherit > Inherit", () => {
+describe("decorators > property decorators > inject > Inject", () => {
 
   it("should inject injectables into decorated properties", () => {
+
     @Injectable()
     class InjectTest1 {}
 
