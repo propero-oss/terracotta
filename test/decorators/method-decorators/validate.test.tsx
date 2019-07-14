@@ -49,8 +49,5 @@ describe("decorators > method decorators > validate > Validate", () => {
     expect(spy).toHaveBeenCalledWith("something");
     expect(el.prop).toEqual("");
 
-  })
-
-
-
+  });
 });
