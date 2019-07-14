@@ -23,7 +23,12 @@ export function Validate(property: string): MethodDecorator {
 }
 
 export class ValidateExtension implements ComponentExtension<Webcomponent> {
-  constructor(private property: string, private propertyKey: string | symbol, private type?: Function) {}
+
+  observedProperties: (string | symbol)[];
+
+  constructor(private property: string | symbol, private propertyKey: string | symbol, private type?: Function) {
+    this.observedProperties = [property];
+  }
 
   beforePropertyChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string | symbol, oldVal: any, newVal: any): any {
     if (key !== this.property) return newVal;
