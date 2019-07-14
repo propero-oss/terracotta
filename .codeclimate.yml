@@ -8,6 +8,9 @@ plugins:
     enabled: true
   nodesecurity:
     enabled: true
+checks:
+  similar-code:
+    threshold: 45
 exclude_patterns:
   - "dist/"
   - "node_modules/"
