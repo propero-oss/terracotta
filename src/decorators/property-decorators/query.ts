@@ -92,8 +92,7 @@ export class QueryExtension implements ComponentExtension<Webcomponent> {
   fetchExisting(instance: Webcomponent) {
     if (!instance[QUERIES])
       instance[QUERIES] = {};
-    return instance[QUERIES][this.propertyKey]
-       || (instance[QUERIES][this.propertyKey] = this.query(instance));
+    return instance[QUERIES][this.propertyKey] || (instance[QUERIES][this.propertyKey] = this.query(instance));
   }
 
   afterRender(cls: Constructor<Webcomponent>, instance: Webcomponent) {
