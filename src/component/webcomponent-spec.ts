@@ -72,16 +72,12 @@ export function createAttributeChangedCallback(target: any, extensions: Componen
 function generateAttributeChangedCallback(target: any, observing: Record<string, ComponentExtension<Webcomponent>[]>) {
   return function (this: Webcomponent, attr: string, oldVal: any, newVal: any) {
 
-    const interested = observing[attr];
+    const interested = observing[attr] || [];
     const orig = newVal;
 
     if (oldVal === newVal) return;
-    if (!interested || !interested.length) {
-      if (this.onAttributeChanged) this.onAttributeChanged(attr, newVal, oldVal);
-      return;
-    }
 
-    if (locked(this, attr) === Stages.ATTRIBUTE) return;
+    if (locked(this, attr)) return;
 
     lock(this, attr, Stages.ATTRIBUTE);
 
@@ -92,7 +88,8 @@ function generateAttributeChangedCallback(target: any, observing: Record<string,
     if (orig !== newVal)
       this.setAttribute(attr, newVal);
 
-    this.onAttributeChanged(attr, newVal, oldVal);
+    if (this.onAttributeChanged)
+      this.onAttributeChanged(attr, newVal, oldVal);
 
     interested
       .filter(ext => ext.afterAttributeChange)
