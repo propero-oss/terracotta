@@ -10,7 +10,7 @@ import {addExtension, ComponentExtension} from "@/component";
 import {Constructor, Webcomponent} from "@/types";
 import {Injectables} from "@/decorators";
 
-export function Inject(what: string | Function, meta: any): PropertyDecorator {
+export function Inject(what: string | Function, meta?: any): PropertyDecorator {
   return function (target, propertyKey) {
     addExtension(target, new InjectExtension(target as Webcomponent, propertyKey, what, meta));
   }

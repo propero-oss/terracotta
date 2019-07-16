@@ -1,9 +1,7 @@
 import {Webcomponent, Constructor} from "@/types";
 import {toKebapCase} from "@/util";
-import {h} from "@/static";
-import {getExtensions} from "@/component/extension";
-import {createWebcomponentAttributes} from "@/component";
-import {createTerraAttributes} from "@/component/terra";
+import {getExtensions, createWebcomponentAttributes, createTerraAttributes, ComponentExtension} from "@/component";
+import {element} from "@/render";
 
 /**
  * @typedef ComponentOptions
@@ -41,25 +39,40 @@ export function defaultTagNameForClass(target: Constructor<any>) {
 export function Component<T>(opts?: ComponentOptions): <T>(target: Constructor<T>) => Constructor<T & Webcomponent> {
   return function<T>(target: Constructor<T>): Constructor<T & Webcomponent> {
     const options = Object.assign({}, DefaultComponentOptions, {tag: defaultTagNameForClass(target)}, opts);
+    const name = target.name;
 
     const extensions = getExtensions(target);
+    target = constructorWrapperClass(target, extensions);
 
     createWebcomponentAttributes(target, options, extensions);
-    createTerraAttributes(target);
+    createTerraAttributes(target, extensions);
 
     extensions
       .filter(extension => extension.register)
       .forEach(extension => extension.register(target));
 
     options.registry.define(options.tag, target, options.opts);
-    console.log(`Registered ${target.name} as ${options.tag}!`);
+    console.log(`Registered ${name} as ${options.tag}!`);
 
     return target as unknown as Constructor<T & Webcomponent>;
   }
 }
 
 export declare namespace Component {
-  export let render: typeof h;
+  export let render: typeof element;
 }
 
-Component.render = h;
+Component.render = element;
+
+export function constructorWrapperClass(target: any, extensions: ComponentExtension<Webcomponent>[]): any {
+  const interested = extensions.filter(ext => ext.construct);
+  // @ts-ignore
+  const cls = class extends target {
+    constructor(...args: any[]) {
+      super(...args);
+      interested.forEach(ext => ext.construct(cls as any, this as any));
+    }
+  };
+
+  return cls;
+}

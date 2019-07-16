@@ -7,7 +7,6 @@ import {NotifyEvent, defaultAttributeProcessor} from "@/properties";
 
 /**
  * @typedef PropertyOptions
- * @property {boolean} [mutable=false] If the value of this property can be modified after initialization of the component.
  * @property {boolean} [notify=false] If changes to the value of this property should be emitting a ‘property-change’ event.
  * @property {'attr'|'prop'|'both'|'none'|'init'} [sync='init'] In which way changes should be reflected between attribute and property. It can have one of the following values:
  *   - attr Changes to the property are synced to the attribute
@@ -22,7 +21,6 @@ import {NotifyEvent, defaultAttributeProcessor} from "@/properties";
  * @property {string} [attribute] The name of the attribute this property represents, defaults to kebap-cased property name.
  */
 export interface PropertyOptions {
-  mutable?: boolean;
   notify?: boolean;
   sync?: "init" | "attr" | "prop" | "both" | "none";
   parser?: ((val: string | boolean, cls: any, prop: string | symbol, type: Function) => any);
@@ -33,7 +31,6 @@ export interface PropertyOptions {
 }
 
 export const DefaultPropertyOptions: PropertyOptions = {
-  mutable: false,
   notify: false,
   sync: "init",
   rerender: true
@@ -82,7 +79,7 @@ export class PropertyExtension implements ComponentExtension<Webcomponent> {
       const type = this.opts.type;
       instance[this.property] = this.opts.parser(val, cls, this.property, type);
       if (this.opts.notify)
-        instance.dispatchEvent(new NotifyEvent(instance[this.property], undefined, Stages.PROPERTY));
+        instance.dispatchEvent(new NotifyEvent(this.property, instance[this.property], undefined, Stages.ATTRIBUTE));
     }
   }
 
@@ -94,12 +91,15 @@ export class PropertyExtension implements ComponentExtension<Webcomponent> {
     else
       instance.setAttribute(this.opts.attribute, val == true ? this.opts.attribute : val as string);
     if (this.opts.notify)
-      instance.dispatchEvent(new NotifyEvent(newVal, oldVal, Stages.PROPERTY));
+      instance.dispatchEvent(new NotifyEvent(this.property, newVal, oldVal, Stages.PROPERTY));
   }
 
   afterAttributeChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string, oldVal: string, newVal: string) {
     const val = instance.getAttribute(this.opts.attribute);
     const type = this.opts.type;
-    instance[this.property] = this.opts.parser(val, cls, this.property, type);
+    const oldProp = instance[this.property];
+    const newProp = instance[this.property] = this.opts.parser(val, cls, this.property, type);
+    if (this.opts.notify)
+      instance.dispatchEvent(new NotifyEvent(this.property, newProp, oldProp, Stages.ATTRIBUTE));
   }
 }

@@ -46,8 +46,6 @@ export class EventExtension implements ComponentExtension<Webcomponent> {
   construct(cls: Constructor<Webcomponent>, instance: Webcomponent) {
     Object.defineProperty(instance, this.propertyKey, {
       value: new EventEmitter<any>(this.options, instance),
-      writable: false,
-      configurable: false,
       enumerable: false
     });
   }
@@ -55,7 +53,7 @@ export class EventExtension implements ComponentExtension<Webcomponent> {
 
 export class EventEmitter<T> {
   constructor(public options: EventOptions, private source: Webcomponent) {}
-  emit(data: T) {
+  emit(data?: T) {
     return this.source.dispatchEvent(new CustomEvent(this.options.name, Object.assign({}, this.options, {detail: data})));
   }
   attach(fn: (ev: CustomEvent<T>) => void) {

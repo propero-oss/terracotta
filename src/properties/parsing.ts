@@ -12,11 +12,11 @@ export function getParser(type: Function) {
 }
 
 registerParser(String,
-  val => val != false ? val : undefined,
+  val => val != null ? val : undefined,
   val => val
 );
 registerParser(Number,
-  val => val != false ? +val : undefined,
+  val => val != null ? +val : undefined,
   val => `${val}`
 );
 registerParser(Boolean,
@@ -24,8 +24,8 @@ registerParser(Boolean,
   val => val
 );
 registerParser(Date,
-  val => val ? (val as Date).toISOString() : undefined,
-  val => val ? new Date(val as string) : undefined
+  val => val ? new Date(val as string) : undefined,
+  val => val ? (val as Date).toISOString() : undefined
 );
 registerParser(RegExp,
   val => val ? new RegExp(val as string) : undefined,
@@ -34,8 +34,8 @@ registerParser(RegExp,
 
 export function defaultAttributeProcessor(kind: "parser" | "serializer") {
   return function(val: any, cls: any, prop: string | symbol, type: Function) {
-    const processor = getParser(type)[kind];
-    if (processor) return processor(val, cls, prop, type);
+    const processors = getParser(type);
+    if (processors) return processors[kind](val, cls, prop, type);
     throw new TypeError(`No ${kind} registered for type ${type.name}.`);
   }
 }

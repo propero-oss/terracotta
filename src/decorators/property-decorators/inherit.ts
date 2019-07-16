@@ -42,21 +42,16 @@ export function Inherit(opts?: InheritOptions): PropertyDecorator {
 export class InheritExtension implements ComponentExtension<Webcomponent> {
   constructor(private options: InheritOptions, private propertyKey: string | symbol) {}
 
-  syncProperty(instance: Webcomponent, parent: HTMLElement) {
+  syncProperty(instance: Webcomponent, parent?: HTMLElement) {
     // @ts-ignore
-    instance[this.propertyKey] = parent[this.options.property || this.propertyKey];
-    if (this.options.rerender)
+    instance[this.propertyKey] = parent ? parent[this.options.property || this.propertyKey] : undefined;
+    if (this.options.rerender && parent)
       instance._requestRerender();
   }
 
-  addHandlerMeta(instance: Webcomponent, handler: () => void) {
+  addHandlerMeta(instance: Webcomponent, parent: any, handler: () => void) {
     const meta = instance[INHERIT_HANDLERS] || (instance[INHERIT_HANDLERS] = {});
-    meta[this.propertyKey] = handler;
-  }
-
-  getHandlerMeta(instance: Webcomponent) {
-    const meta = instance[INHERIT_HANDLERS] || (instance[INHERIT_HANDLERS] = {});
-    return meta[this.propertyKey];
+    meta[this.propertyKey] = [parent, handler];
   }
 
   deleteHandlerMeta(instance: Webcomponent) {
@@ -72,14 +67,14 @@ export class InheritExtension implements ComponentExtension<Webcomponent> {
     this.syncProperty(instance, parent);
     const handler = this.syncProperty.bind(this, instance, parent);
     this.options.syncOn.forEach(evt => parent.addEventListener(evt, handler));
-    this.addHandlerMeta(instance, handler);
+    this.addHandlerMeta(instance, parent, handler);
   }
 
   disconnect(cls: Constructor<Webcomponent>, instance: Webcomponent) {
-    const parent = getParentOf(instance, this.options);
-    if (!parent) return;
-    const handler = this.deleteHandlerMeta(instance);
-    if (handler)
-      this.options.syncOn.forEach(evt => parent.removeEventListener(evt, handler));
+    const handlerMeta = this.deleteHandlerMeta(instance);
+    if (!handlerMeta) return;
+    const [parent, handler] = handlerMeta;
+    this.options.syncOn.forEach(evt => parent.removeEventListener(evt, handler));
+    this.syncProperty(instance);
   }
 }

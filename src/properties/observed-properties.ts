@@ -14,7 +14,7 @@ export function createAccessors(target: Constructor<any>, extensions: ComponentE
       set(val: any) {
         if (!this[PROPERTIES]) this[PROPERTIES] = {};
 
-        if (locked(this, prop) === Stages.PROPERTY) {
+        if (locked(this, prop)) {
           this[PROPERTIES][prop] = val;
           return;
         }
@@ -22,7 +22,7 @@ export function createAccessors(target: Constructor<any>, extensions: ComponentE
         lock(this, prop, Stages.PROPERTY);
 
         const before = this[prop];
-        val = relevant.reduce((val, ext) => !ext.beforePropertyChange ? val : ext.beforePropertyChange(target, this, prop, before, val));
+        val = relevant.reduce((val, ext) => !ext.beforePropertyChange ? val : ext.beforePropertyChange(target, this, prop, before, val), val);
         this[PROPERTIES][prop] = val;
         relevant.forEach(ext => ext.afterPropertyChange && ext.afterPropertyChange(target, this, prop, before, val));
 

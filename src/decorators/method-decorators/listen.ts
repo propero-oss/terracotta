@@ -28,13 +28,13 @@ export const DefaultListenOptions: ListenOptions = {
 export function Listen(opts?: string | ListenOptions): MethodDecorator {
   return function (target, propertyKey, descriptor) {
     const options = Object.assign({}, DefaultListenOptions, typeof opts === "string" ? { event: opts } : opts);
-    addExtension(target, new ListenExtension(options, propertyKey, descriptor));
+    addExtension(target, new ListenExtension(options, propertyKey));
     return Autobound()(target, propertyKey, descriptor);
   }
 }
 
 export class ListenExtension implements ComponentExtension<Webcomponent> {
-  constructor(private options: ListenOptions, private propertyKey: string | symbol, private descriptor: PropertyDescriptor) {
+  constructor(private options: ListenOptions, private propertyKey: string | symbol) {
     if (options.event.indexOf('@') !== -1) {
       const [target, event] = options.event.split('@');
       options.target = target;
@@ -53,19 +53,22 @@ export class ListenExtension implements ComponentExtension<Webcomponent> {
       case "document": return document;
       case "window": return window;
       case "parent": return instance.parentNode as HTMLElement;
+      case "host": return instance;
       default: return this.queryOrGetTarget(instance);
     }
   }
 
   attachHandler(instance: Webcomponent) {
-    this.target(instance).addEventListener(this.options.event, instance[this.propertyKey]);
+    const target = this.target(instance);
+    if (target)
+      target.addEventListener(this.options.event, instance[this.propertyKey]);
   }
 
   detachHandler(instance: Webcomponent) {
-    this.target(instance).removeEventListener(this.options.event, instance[this.propertyKey]);
+    const target = this.target(instance);
+    if (target)
+      target.removeEventListener(this.options.event, instance[this.propertyKey]);
   }
-
-  construct(cls: Constructor<Webcomponent>, instance: Webcomponent) {}
 
   connect(cls: Constructor<Webcomponent>, instance: Webcomponent) {
     this.attachHandler(instance);

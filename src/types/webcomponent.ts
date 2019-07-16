@@ -17,7 +17,7 @@ export interface Webcomponent extends HTMLElement {
    * Render the component using JSX and the provided static function h()
    * @param {Function} h The JSX render function
    */
-  render?(h:any): any;
+  render?(): any;
 
   /**
    * Called once an attribute of the host element changes. Should never modify the attribute values.

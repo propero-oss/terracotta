@@ -10,7 +10,7 @@
 import {addExtension, ComponentExtension} from "@/component";
 import {Constructor, Webcomponent} from "@/types";
 
-export function Watch(property: string): MethodDecorator {
+export function Watch(property: string | symbol): MethodDecorator {
   return function (target, propertyKey, descriptor) {
     addExtension(target, new WatchExtension(property, propertyKey));
     return descriptor;
@@ -18,10 +18,15 @@ export function Watch(property: string): MethodDecorator {
 }
 
 export class WatchExtension implements ComponentExtension<Webcomponent> {
-  constructor(private property: string, private propertyKey: string | symbol) {}
+
+  observedProperties: (string | symbol)[];
+
+  constructor(private property: string | symbol, private propertyKey: string | symbol) {
+    this.observedProperties = [property];
+  }
+
   afterPropertyChange(cls: Constructor<Webcomponent>, instance: Webcomponent, key: string | symbol, oldVal: any, newVal: any) {
     if (key !== this.property) return;
-    const watch = instance[this.propertyKey].bind(instance);
-    watch(newVal, oldVal, key);
+    instance[this.propertyKey].call(instance, newVal, oldVal, key);
   }
 }

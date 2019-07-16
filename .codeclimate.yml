@@ -8,6 +8,9 @@ plugins:
     enabled: true
   nodesecurity:
     enabled: true
+checks:
+  similar-code:
+    threshold: 60
 exclude_patterns:
   - "dist/"
   - "node_modules/"
@@ -16,3 +19,4 @@ exclude_patterns:
   - "**.d.ts"
   - "**/*.md"
   - "**/*.config.*"
+  - "**/*.conf.*"
