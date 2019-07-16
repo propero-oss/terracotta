@@ -2,10 +2,11 @@ import {Constructor} from "@/types";
 import {addExtension, ComponentExtension} from "@/component";
 import {Webcomponent} from "@/types";
 import {QUERIES} from "@/constants";
+import {getParentOf} from "@/util";
 
 /**
  * @typedef QueryOptions
- * @property {string|Element} [target="host"] The element to query. It can be one of the following: host, parent, document or an HTMLElement.
+ * @property {string|Element} [target="host"] The element to query. It can be one of the following: host, parent, document, a css selector or an HTMLElement.
  * @property {boolean} [once=false] If the selector should only be queried once and every subsequent access should return the same result.
  * @property {boolean} [onRender=false] If the selector should only be queried once per render.
  * @property {boolean} [multiple=false] If this is set to true, querySelectorAll will be used.
@@ -35,20 +36,22 @@ export const DefaultQueryOptions: QueryOptions = {
  */
 export function Query(selector: string | QueryOptions): PropertyDecorator {
   return function<T>(target, propertyKey) {
-    const options = Object.assign({}, DefaultQueryOptions, typeof selector === "string" ? {selector: selector} : selector);
-    addExtension(target, new QueryExtension(options, options.selector, propertyKey));
+    let queryTarget = DefaultQueryOptions.target;
+    if (typeof selector === "string" && selector.indexOf('@') != -1)
+      [queryTarget, selector] = selector.split('@');
+    const options = Object.assign({}, DefaultQueryOptions, typeof selector === "string" ? {selector: selector, target: queryTarget} : selector);
+    addExtension(target, new QueryExtension(options, propertyKey));
   }
 }
 
 
 export class QueryExtension implements ComponentExtension<Webcomponent> {
-  constructor(private options: QueryOptions, private selector: string, private propertyKey: string | symbol) {}
+  constructor(private options: QueryOptions, private propertyKey: string | symbol) {}
 
   query(el: Webcomponent) {
-    const options = this.options;
-    const selector = this.selector;
+    const {multiple, selector} = this.options;
     const root = this.root(el);
-    return options.multiple ? [...root.querySelectorAll(selector)] : root.querySelector(selector);
+    return multiple ? [...root.querySelectorAll(selector)] : root.querySelector(selector);
   }
 
   root(el: Webcomponent) {
@@ -60,13 +63,23 @@ export class QueryExtension implements ComponentExtension<Webcomponent> {
       case "parent":
         return el.parentNode;
       default:
-        return this.options.target as HTMLElement;
+        return this.queryRoot(el);
     }
   }
 
+  queryRoot(el: Webcomponent) {
+    if (typeof this.options.target === "string")
+      return getParentOf(el, {
+        walkDom: true,
+        selector: this.options.target
+      }) || document.querySelector(this.options.target);
+    return this.options.target as HTMLElement;
+  }
+
   construct(cls: Constructor<Webcomponent>, instance: Webcomponent) {
+    const queryGetter = this.queryGetter.bind(this);
     Object.defineProperty(instance, this.propertyKey, {
-      get: this.queryGetter.bind(this)
+      get: function() { return queryGetter(this); }
     });
   }
 
@@ -79,8 +92,8 @@ export class QueryExtension implements ComponentExtension<Webcomponent> {
   fetchExisting(instance: Webcomponent) {
     if (!instance[QUERIES])
       instance[QUERIES] = {};
-    if (instance[QUERIES[this.propertyKey]])
-      return instance[QUERIES[this.propertyKey]];
+    return instance[QUERIES][this.propertyKey]
+       || (instance[QUERIES][this.propertyKey] = this.query(instance));
   }
 
   afterRender(cls: Constructor<Webcomponent>, instance: Webcomponent) {
