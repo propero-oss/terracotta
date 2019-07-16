@@ -38,7 +38,6 @@ export function Parent(opts?: ParentOptions): PropertyDecorator {
 export class ParentExtension implements ComponentExtension<Webcomponent> {
   constructor(private options: ParentOptions, private propertyKey: string | symbol) {}
   construct(cls: Constructor<Webcomponent>, instance: Webcomponent) {
-    console.log("TEST", instance);
     Object.defineProperty(instance, this.propertyKey, {
       get: this.createGetter(instance)
     });
@@ -58,7 +57,6 @@ export class ParentExtension implements ComponentExtension<Webcomponent> {
   }
 
   getOnce(instance: HTMLElement, prop, options) {
-    console.log(instance);
     if (!instance[PARENTS]) instance[PARENTS] = {};
     if (instance[PARENTS][prop]) return instance[PARENTS][prop];
     return instance[PARENTS][prop] = getParentOf(instance, options);
